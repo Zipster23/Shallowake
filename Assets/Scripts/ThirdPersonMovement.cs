@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class ThirdPersonMovement : MonoBehaviour
 {
-    public CharacterController controller;
-    private PlayerInputController _playerInputController;
+    private PlayerInputController playerInputController;
+
+    private Rigidbody playerRigidBody;
 
     [SerializeField]
     private float speed = 6f;
@@ -17,11 +18,12 @@ public class ThirdPersonMovement : MonoBehaviour
 
     private void Awake()
     {
-        _playerInputController = GetComponent<PlayerInputController>();
+        playerInputController = GetComponent<PlayerInputController>();
+        playerRigidBody = GetComponent<Rigidbody>();
     }
     private void Update()
     {
-        Vector3 direction = new Vector3(_playerInputController.MovementInputVector.x, 0, _playerInputController.MovementInputVector.y).normalized;
+        Vector3 direction = new Vector3(playerInputController.MovementInputVector.x, 0, playerInputController.MovementInputVector.y).normalized;
         
         if (direction.magnitude >= 0.1f)
         {
@@ -30,7 +32,7 @@ public class ThirdPersonMovement : MonoBehaviour
 
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
-            controller.Move(direction * speed * Time.deltaTime);
+            playerRigidBody.AddForce(direction.x * speed * Time.deltaTime, 0, direction.z * speed * Time.deltaTime);
         }
     }
 }
