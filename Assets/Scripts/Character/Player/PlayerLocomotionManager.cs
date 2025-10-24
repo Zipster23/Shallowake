@@ -24,6 +24,8 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
     public void HandleAllMovement()
     {
 
+        HandleGroundedMovement();
+
     }
 
     private void HandleGroundedMovement()
@@ -37,11 +39,12 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
         if(PlayerInputManager.instance.moveAmount > 0.5f)
         {
             // move at a running speed
+            player.characterController.Move(moveDirection * runningSpeed * Time.deltaTime);
         }
         else if(PlayerInputManager.instance.moveAmount <= 0.5f)
         {
             // move at a walking speed
-
+            player.characterController.Move(moveDirection * walkingSpeed * Time.deltaTime);
         }
     }
 
