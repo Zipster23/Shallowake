@@ -29,9 +29,17 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
 
     }
 
+    private void GetVerticalAndHorizontalInputs()
+    {
+        verticalMovement = PlayerInputManager.instance.verticalInput;
+        horizontalMovement = PlayerInputManager.instance.horizontalInput;
+    }
+
     private void HandleGroundedMovement()
     {
         
+        GetVerticalAndHorizontalInputs();
+
         moveDirection = PlayerCamera.instance.transform.forward * verticalMovement; // move relative to which way the player is facing
         moveDirection = moveDirection + PlayerCamera.instance.transform.right * horizontalMovement; // adds the left and right movement
         moveDirection.Normalize(); // makes sure the player doesn't move faster diagonally

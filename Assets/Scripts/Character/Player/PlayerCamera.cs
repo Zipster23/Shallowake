@@ -9,7 +9,7 @@ public class PlayerCamera : MonoBehaviour
 
     private void Awake()
     {
-        if(instance = null)
+        if(instance == null)
         {
             instance = this;
         }

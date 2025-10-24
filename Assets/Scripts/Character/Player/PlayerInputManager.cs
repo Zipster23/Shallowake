@@ -10,8 +10,8 @@ public class PlayerInputManager : MonoBehaviour
     PlayerControls playerControls;
 
     [SerializeField] Vector2 movementInput;
-    [SerializeField] float verticalInput;
-    [SerializeField] float horizontalInput;
+    public float verticalInput;
+    public float horizontalInput;
     public float moveAmount;
 
     private void Awake()
@@ -67,6 +67,21 @@ public class PlayerInputManager : MonoBehaviour
     {
         // if we destroy this object, unsusbcribe from this event
         SceneManager.activeSceneChanged -= OnSceneChange;
+    }
+
+    private void OnApplicationFocus(bool focus)
+    {
+        if(enabled)
+        {
+            if(focus)
+            {
+                playerControls.Enable();
+            }
+            else
+            {
+                playerControls.Disable();
+            }
+        }
     }
 
     private void Update()
