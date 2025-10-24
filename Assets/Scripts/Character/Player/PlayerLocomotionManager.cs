@@ -6,11 +6,12 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
 {
     
     PlayerManager player;
-    public float verticalMovement;
-    public float horizontalMovement;
-    public float moveAmount;
+    public float verticalMovement; // how much the player is pushing up and down
+    public float horizontalMovement; // how much the player is pushing left and right
+    public float moveAmount; // how much total movement is happening (vertical and horizontal)
 
     private Vector3 moveDirection;
+    // sets "test" integers for walking and running speed
     [SerializeField] float walkingSpeed = 2;
     [SerializeField] float runningSpeed = 5;
 
@@ -18,10 +19,10 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
     {
         base.Awake();
 
-        player = GetComponent<PlayerManager>();
+        player = GetComponent<PlayerManager>(); // gets a reference to the PlayerManager
     }
 
-    public void HandleAllMovement()
+    public void HandleAllMovement() // function that will handle all movement (grounded, aerial, etc)
     {
 
         HandleGroundedMovement();
@@ -30,11 +31,11 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
 
     private void HandleGroundedMovement()
     {
-        // Move direction is based off the camera's perspective & movement inputs
-        moveDirection = PlayerCamera.instance.transform.forward * verticalMovement;
-        moveDirection = moveDirection + PlayerCamera.instance.transform.right * horizontalMovement;
-        moveDirection.Normalize();
-        moveDirection.y = 0;
+        
+        moveDirection = PlayerCamera.instance.transform.forward * verticalMovement; // move relative to which way the player is facing
+        moveDirection = moveDirection + PlayerCamera.instance.transform.right * horizontalMovement; // adds the left and right movement
+        moveDirection.Normalize(); // makes sure the player doesn't move faster diagonally
+        moveDirection.y = 0; // keeps movement horizontal
 
         if(PlayerInputManager.instance.moveAmount > 0.5f)
         {

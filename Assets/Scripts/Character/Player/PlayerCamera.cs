@@ -19,4 +19,9 @@ public class PlayerCamera : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        DontDestroyOnLoad(gameObject); 
+    }
+
 }
