@@ -4,15 +4,24 @@ using UnityEngine;
 
 public class PlayerUIManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    
+    public static PlayerUIManager instance;
+
+    private void Awake()
     {
-        
+        if (instance == null)
+        {
+            instance = this;
+        } 
+        else 
+        {
+            Destroy(gameObject);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        DontDestroyOnLoad(gameObject);
     }
+
 }

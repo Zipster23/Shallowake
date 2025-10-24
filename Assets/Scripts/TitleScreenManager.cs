@@ -4,15 +4,10 @@ using UnityEngine;
 
 public class TitleScreenManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    
+    public void StartNewGame()
     {
-        
+        StartCoroutine(WorldSaveGameManager.instance.LoadNewGame());
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
