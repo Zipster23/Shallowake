@@ -32,7 +32,7 @@ public class ThirdPersonMovement : MonoBehaviour
 
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
-            playerRigidBody.AddForce(direction.x * speed * Time.deltaTime, 0, direction.z * speed * Time.deltaTime);
+            transform.position += new Vector3(direction.x * speed * Time.deltaTime, 0, direction.z * speed * Time.deltaTime);
         }
     }
 }

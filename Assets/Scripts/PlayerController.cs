@@ -7,21 +7,16 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField]
-    private float _speed;
-    private PlayerInputController _playerInputController;
+    private float speed;
+    private PlayerInputController playerInputController;
     private void Awake()
     {
-        _playerInputController = GetComponent<PlayerInputController>();
+        playerInputController = GetComponent<PlayerInputController>();
     }
 
     private void Update()
     {
-        Vector3 positionChange = new Vector3(
-            _playerInputController.MovementInputVector.x,
-            0,
-            _playerInputController.MovementInputVector.y)
-            * Time.deltaTime
-            * _speed;
+        Vector3 positionChange = new Vector3(playerInputController.MovementInputVector.x, 0, playerInputController.MovementInputVector.y) * Time.deltaTime * speed;
 
         transform.position += positionChange;
     }
