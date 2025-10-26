@@ -69,6 +69,7 @@ public class PlayerInputManager : MonoBehaviour
         SceneManager.activeSceneChanged -= OnSceneChange;
     }
 
+    // if we minimize game, stop adjusting inputs
     private void OnApplicationFocus(bool focus)
     {
         if(enabled)
