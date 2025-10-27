@@ -14,6 +14,9 @@ public class ThirdPersonMovement : MonoBehaviour
     [SerializeField]
     private float speed = 6f;
 
+    [SerializeField]
+    private float sprintSpeed = 10f;
+
     // Rate at which character turns to face in direction of movement
     [SerializeField]
     private float turnSmoothTime = 0.1f;
@@ -29,7 +32,17 @@ public class ThirdPersonMovement : MonoBehaviour
     {
         // Getting direction based on movement input
         Vector3 direction = new Vector3(playerInputController.MovementInputVector.x, 0, playerInputController.MovementInputVector.y).normalized;
-        
+
+        float currentSpeed;
+
+        if(playerInputController.isSprinting)
+        {
+            currentSpeed = sprintSpeed;
+        } else
+        {
+            currentSpeed = speed;
+        }
+
         // If enough movement input, then move and turn
         if (direction.magnitude >= 0.1f)
         {
@@ -43,7 +56,7 @@ public class ThirdPersonMovement : MonoBehaviour
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
             // Move the player
-            controller.Move(direction * speed * Time.deltaTime);
+            controller.Move(direction * currentSpeed * Time.deltaTime);
         }
     }
 }

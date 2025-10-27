@@ -958,6 +958,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 1566126189}
   speed: 10
+  sprintSpeed: 18
   turnSmoothTime: 0.1
 --- !u!143 &1566126189
 CharacterController:
@@ -980,10 +981,10 @@ CharacterController:
   serializedVersion: 3
   m_Height: 2
   m_Radius: 0.5
-  m_SlopeLimit: 45
+  m_SlopeLimit: 90
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
+  m_MinMoveDistance: 0
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1566126190
 MonoBehaviour:
