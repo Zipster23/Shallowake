@@ -1415,6 +1415,11 @@ PrefabInstance:
       propertyPath: cameraPivotTransform
       value: 
       objectReference: {fileID: 575416169}
+    - target: {fileID: -2282318173606835155, guid: ab1dc23082928a54ca6b3c895d0d7f8b,
+        type: 3}
+      propertyPath: collideWithLayers.m_Bits
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 296364407543420616, guid: ab1dc23082928a54ca6b3c895d0d7f8b,
         type: 3}
       propertyPath: m_Name
@@ -1470,15 +1475,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6217098234156591260, guid: ab1dc23082928a54ca6b3c895d0d7f8b,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -3
-      objectReference: {fileID: 0}
     - target: {fileID: 7192801003742994446, guid: ab1dc23082928a54ca6b3c895d0d7f8b,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.6
+      value: 1.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
