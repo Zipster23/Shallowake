@@ -79,6 +79,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   cameraObject: {fileID: 4448215893580683037}
+  cameraPivotTransform: {fileID: 7192801003742994446}
+  leftAndRightRotationSpeed: 50
+  upAndDownRotationSpeed: 50
+  minimumPivot: -30
+  maximumPivot: 60
+  cameraCollisionRadius: 0.2
+  collideWithLayers:
+    serializedVersion: 2
+    m_Bits: 1
+  leftAndRightLookAngle: 0
+  upAndDownLookAngle: 0
 --- !u!1 &6542738894612783195
 GameObject:
   m_ObjectHideFlags: 0
