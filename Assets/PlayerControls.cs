@@ -35,6 +35,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DodgeSprint"",
+                    ""type"": ""Button"",
+                    ""id"": ""1ea33410-5c1a-44c6-a4b5-f95c5574875d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -147,6 +156,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1d38f95e-36f7-45e4-93d5-0eac6f0d2943"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": ""Tap,Hold"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DodgeSprint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -239,6 +259,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         // Player Movement
         m_PlayerMovement = asset.FindActionMap("Player Movement", throwIfNotFound: true);
         m_PlayerMovement_Movement = m_PlayerMovement.FindAction("Movement", throwIfNotFound: true);
+        m_PlayerMovement_DodgeSprint = m_PlayerMovement.FindAction("DodgeSprint", throwIfNotFound: true);
         // Player Camera
         m_PlayerCamera = asset.FindActionMap("Player Camera", throwIfNotFound: true);
         m_PlayerCamera_Movement = m_PlayerCamera.FindAction("Movement", throwIfNotFound: true);
@@ -304,11 +325,13 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_PlayerMovement;
     private List<IPlayerMovementActions> m_PlayerMovementActionsCallbackInterfaces = new List<IPlayerMovementActions>();
     private readonly InputAction m_PlayerMovement_Movement;
+    private readonly InputAction m_PlayerMovement_DodgeSprint;
     public struct PlayerMovementActions
     {
         private @PlayerControls m_Wrapper;
         public PlayerMovementActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_PlayerMovement_Movement;
+        public InputAction @DodgeSprint => m_Wrapper.m_PlayerMovement_DodgeSprint;
         public InputActionMap Get() { return m_Wrapper.m_PlayerMovement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -321,6 +344,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Movement.started += instance.OnMovement;
             @Movement.performed += instance.OnMovement;
             @Movement.canceled += instance.OnMovement;
+            @DodgeSprint.started += instance.OnDodgeSprint;
+            @DodgeSprint.performed += instance.OnDodgeSprint;
+            @DodgeSprint.canceled += instance.OnDodgeSprint;
         }
 
         private void UnregisterCallbacks(IPlayerMovementActions instance)
@@ -328,6 +354,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Movement.started -= instance.OnMovement;
             @Movement.performed -= instance.OnMovement;
             @Movement.canceled -= instance.OnMovement;
+            @DodgeSprint.started -= instance.OnDodgeSprint;
+            @DodgeSprint.performed -= instance.OnDodgeSprint;
+            @DodgeSprint.canceled -= instance.OnDodgeSprint;
         }
 
         public void RemoveCallbacks(IPlayerMovementActions instance)
@@ -394,6 +423,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     public interface IPlayerMovementActions
     {
         void OnMovement(InputAction.CallbackContext context);
+        void OnDodgeSprint(InputAction.CallbackContext context);
     }
     public interface IPlayerCameraActions
     {

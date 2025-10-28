@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 public class PlayerInputManager : MonoBehaviour
 {
@@ -14,6 +15,10 @@ public class PlayerInputManager : MonoBehaviour
     public float verticalInput;
     public float horizontalInput;
     public float moveAmount;
+
+    [Header("Player Dodge Sprint Input")]
+    [SerializeField] bool isSprinting;
+    InputAction dodgeAction;
 
     [Header("Camera Movement Input")]
     [SerializeField] Vector2 cameraInput;
@@ -38,6 +43,8 @@ public class PlayerInputManager : MonoBehaviour
 
         // When the scene changes, this function is ran
         SceneManager.activeSceneChanged += OnSceneChange;
+
+        dodgeAction = playerControls.FindAction("DodgeSprint");
 
         instance.enabled = false;
     }

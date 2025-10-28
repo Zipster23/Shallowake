@@ -13,6 +13,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "DodgeSprint",
+                    "type": "Button",
+                    "id": "1ea33410-5c1a-44c6-a4b5-f95c5574875d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -125,6 +134,17 @@
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "1d38f95e-36f7-45e4-93d5-0eac6f0d2943",
+                    "path": "<Keyboard>/space",
+                    "interactions": "Tap,Hold",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DodgeSprint",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
