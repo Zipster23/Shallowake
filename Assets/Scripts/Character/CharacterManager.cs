@@ -7,6 +7,8 @@ public class CharacterManager : MonoBehaviour
     
     public CharacterController characterController;
 
+    public bool isSprinting = false;
+
     protected virtual void Awake()
     {
         DontDestroyOnLoad(this);

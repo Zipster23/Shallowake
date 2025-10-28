@@ -13,15 +13,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
-                },
-                {
-                    "name": "DodgeSprint",
-                    "type": "Button",
-                    "id": "1ea33410-5c1a-44c6-a4b5-f95c5574875d",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -134,17 +125,6 @@
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
-                },
-                {
-                    "name": "",
-                    "id": "1d38f95e-36f7-45e4-93d5-0eac6f0d2943",
-                    "path": "<Keyboard>/space",
-                    "interactions": "Tap,Hold",
-                    "processors": "",
-                    "groups": "",
-                    "action": "DodgeSprint",
-                    "isComposite": false,
-                    "isPartOfComposite": false
                 }
             ]
         },
@@ -226,6 +206,54 @@
                     "processors": "",
                     "groups": "",
                     "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Player Actions",
+            "id": "aebf3904-832f-4bef-a0d8-ccf678a022cb",
+            "actions": [
+                {
+                    "name": "Sprint",
+                    "type": "PassThrough",
+                    "id": "6920eff1-9a20-46b7-a07e-6896f9a3011b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Hold",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Dodge",
+                    "type": "Button",
+                    "id": "cd1eb977-0daa-45be-8f2c-a3c4caa2c67d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Tap",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "70005556-aaec-42c2-9d79-31d22e081690",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Sprint",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2fa00205-ed49-4c83-b16c-fc7ad80a3dbb",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Dodge",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

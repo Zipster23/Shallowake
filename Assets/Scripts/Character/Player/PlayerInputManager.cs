@@ -10,20 +10,22 @@ public class PlayerInputManager : MonoBehaviour
 
     PlayerControls playerControls;
 
+    public PlayerManager player;
+
+    [Header("Camera Movement Input")]
+    [SerializeField] Vector2 cameraInput;
+    public float cameraVerticalInput;
+    public float cameraHorizontalInput;
+
     [Header("Player Movement Input")]
     [SerializeField] Vector2 movementInput;
     public float verticalInput;
     public float horizontalInput;
     public float moveAmount;
 
-    [Header("Player Dodge Sprint Input")]
-    [SerializeField] bool isSprinting;
-    InputAction dodgeAction;
-
-    [Header("Camera Movement Input")]
-    [SerializeField] Vector2 cameraInput;
-    public float cameraVerticalInput;
-    public float cameraHorizontalInput;
+    [Header("Player Action Input")]
+    [SerializeField] bool dodgeInput = false;
+    [SerializeField] bool sprintInput = false;
 
     private void Awake()
     {
@@ -43,8 +45,6 @@ public class PlayerInputManager : MonoBehaviour
 
         // When the scene changes, this function is ran
         SceneManager.activeSceneChanged += OnSceneChange;
-
-        dodgeAction = playerControls.FindAction("DodgeSprint");
 
         instance.enabled = false;
     }
@@ -72,6 +72,14 @@ public class PlayerInputManager : MonoBehaviour
 
             playerControls.PlayerMovement.Movement.performed += i => movementInput = i.ReadValue<Vector2>();
             playerControls.PlayerCamera.Movement.performed += i => cameraInput = i.ReadValue<Vector2>();
+
+            playerControls.PlayerActions.Dodge.performed += i => dodgeInput = true;
+
+            // Holding the input, activates sprinting
+            playerControls.PlayerActions.Sprint.performed += i => sprintInput = true;
+
+            // Releasing the input, deactivates sprinting
+            playerControls.PlayerActions.Sprint.canceled += i => sprintInput = false;
         }
 
         playerControls.Enable();
@@ -103,6 +111,7 @@ public class PlayerInputManager : MonoBehaviour
     {
         HandlePlayerMovementInput();
         HandleCameraMovementInput();
+        HandleSprinting();
     }
 
     private void HandlePlayerMovementInput()
@@ -127,6 +136,26 @@ public class PlayerInputManager : MonoBehaviour
     {
         cameraVerticalInput = cameraInput.y;
         cameraHorizontalInput = cameraInput.x;
+    }
+
+    private void HandleDodgeInput()
+    {
+        if (dodgeInput)
+        {
+            dodgeInput = false;
+        }
+    }
+
+    private void HandleSprinting()
+    {
+        if(sprintInput)
+        {
+            player.playerLocomotionManager.HandleSprinting();
+        }
+        else
+        {
+            player.isSpr
+        }
     }
 
 }

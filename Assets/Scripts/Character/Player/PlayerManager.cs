@@ -5,13 +5,15 @@ using UnityEngine;
 public class PlayerManager : CharacterManager
 {
    
-    PlayerLocomotionManager playerLocomotionManager;
+    public PlayerLocomotionManager playerLocomotionManager;
+    public CharacterManager playerCharacterManager;
 
     protected override void Awake()
     {
         base.Awake();
 
         playerLocomotionManager = GetComponent<PlayerLocomotionManager>();
+        playerCharacterManager = GetComponent<CharacterManager>();
     }
 
     protected override void Update()
