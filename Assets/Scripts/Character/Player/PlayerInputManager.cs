@@ -10,7 +10,7 @@ public class PlayerInputManager : MonoBehaviour
 
     PlayerControls playerControls;
 
-    public PlayerManager player;
+    PlayerManager player;
 
     [Header("Camera Movement Input")]
     [SerializeField] Vector2 cameraInput;
@@ -109,9 +109,15 @@ public class PlayerInputManager : MonoBehaviour
 
     private void Update()
     {
+        HandleAllInputs();
+    }
+
+    private void HandleAllInputs()
+    {
         HandlePlayerMovementInput();
         HandleCameraMovementInput();
-        HandleSprinting();
+        HandleDodgeInput();
+        // HandleSprinting();
     }
 
     private void HandlePlayerMovementInput()
@@ -143,9 +149,12 @@ public class PlayerInputManager : MonoBehaviour
         if (dodgeInput)
         {
             dodgeInput = false;
+
+            player.playerLocomotionManager.AttemptToPerformDodge();
         }
     }
 
+    /*
     private void HandleSprinting()
     {
         if(sprintInput)
@@ -154,8 +163,8 @@ public class PlayerInputManager : MonoBehaviour
         }
         else
         {
-            player.isSpr
+            player.isSprinting = true;
         }
     }
-
+    */
 }

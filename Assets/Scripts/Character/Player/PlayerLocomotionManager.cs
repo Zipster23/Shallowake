@@ -44,7 +44,11 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
 
     private void HandleGroundedMovement()
     {
-        
+        if(!player.canMove)
+        {
+            return;
+        }
+
         GetVerticalAndHorizontalInputs();
 
         moveDirection = PlayerCamera.instance.transform.forward * verticalMovement; // move relative to which way the player is facing
@@ -66,6 +70,11 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
 
     private void HandleRotation()
     {
+        if (!player.canRotate)
+        {
+            return;
+        }
+
         Vector3 targetRotationDirection = Vector3.zero;
         targetRotationDirection = PlayerCamera.instance.cameraObject.transform.forward * verticalMovement;
         targetRotationDirection = targetRotationDirection + PlayerCamera.instance.cameraObject.transform.right * horizontalMovement;
@@ -82,14 +91,12 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
         transform.rotation = targetRotation;
     }
 
-    public void HandleSprinting()
+    /*public void HandleSprinting()
     {
-        /*
         if (player.isPerformingAction)
         {
             player.playerCharacterManager.isSprinting = true;
         }
-        */
 
         if (moveAmount >= 0.5)
         {
@@ -99,15 +106,16 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
         {
             player.playerCharacterManager.isSprinting = false;
         }
-    }
+    }*/
 
     public void AttemptToPerformDodge()
     {
         // if we are moving when we want to dodge, then we roll
-        if ( PlayerInputManager.instance.moveAmount > 0)
+        if (PlayerInputManager.instance.moveAmount > 0)
         {
+
             rollDirection = PlayerCamera.instance.cameraObject.transform.forward * PlayerInputManager.instance.verticalInput;
-            rollDirection += PlayerCamera.instance.cameraObject.transform.forward * PlayerInputManager.instance.horizontalInput;
+            rollDirection += PlayerCamera.instance.cameraObject.transform.right * PlayerInputManager.instance.horizontalInput;
             rollDirection.y = 0;
             rollDirection.Normalize();
 
@@ -119,7 +127,7 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
         // if we are still, then we backstep
         else
         {
-
+            // perform backstep animation
         }
 
     }
