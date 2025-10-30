@@ -89,45 +89,45 @@ public class PlayerCamera : MonoBehaviour
 
     private void HandleRotations()
     {
-        leftAndRightLookAngle += (PlayerInputManager.instance.cameraHorizontalInput * leftAndRightRotationSpeed) * Time.deltaTime;
-        upAndDownLookAngle -= (PlayerInputManager.instance.cameraVerticalInput * upAndDownRotationSpeed) * Time.deltaTime;
-        upAndDownLookAngle = Mathf.Clamp(upAndDownLookAngle, minimumPivot, maximumPivot);
+        leftAndRightLookAngle += (PlayerInputManager.instance.cameraHorizontalInput * leftAndRightRotationSpeed) * Time.deltaTime; // Gets your horizontal rotation when you move the mouse/joystick
+        upAndDownLookAngle -= (PlayerInputManager.instance.cameraVerticalInput * upAndDownRotationSpeed) * Time.deltaTime;         // Gets your vertical rotation when you move the mouse/joystick
+        upAndDownLookAngle = Mathf.Clamp(upAndDownLookAngle, minimumPivot, maximumPivot); // Prevents you from looking too far up or down
 
-        Vector3 cameraRotation = Vector3.zero;
-        Quaternion targetRotation; 
+        Vector3 cameraRotation = Vector3.zero; // Blank variable to hold rotation numbers
+        Quaternion targetRotation;             // Make a quaternion variable (used to represent rotation) that will be used to store the final rotation we'll apply
 
-        // Rotate this gameobject left and right
-        cameraRotation.y = leftAndRightLookAngle;
-        targetRotation = Quaternion.Euler(cameraRotation);
-        transform.rotation = targetRotation;
+        cameraRotation.y = leftAndRightLookAngle;           // Put the left/right angle into the Y slot (spinning horizontally)
+        targetRotation = Quaternion.Euler(cameraRotation);  // Turn those numbers into an actual rotation Unity can use
+        transform.rotation = targetRotation;                // Apply this rotation to the camera
 
-        // Rotate this pivot gameobject up and down
-        cameraRotation = Vector3.zero;
-        cameraRotation.x = upAndDownLookAngle;
-        targetRotation = Quaternion.Euler(cameraRotation);
-        cameraPivotTransform.localRotation = targetRotation;
+        cameraRotation = Vector3.zero;                          // Clear the variable to use it again
+        cameraRotation.x = upAndDownLookAngle;                  // Put the up/down angle into the X slot (tilting vertically)
+        targetRotation = Quaternion.Euler(cameraRotation);      // Turn those numbers into an actual rotation Unity can use
+        cameraPivotTransform.localRotation = targetRotation;    // Apply this rotation to the camera
     }   
 
     private void HandleCollisions()
     {
-        targetCameraZPosition = cameraZPosition;
-        RaycastHit hit;
-        Vector3 direction = cameraObject.transform.position - cameraPivotTransform.position;
-        direction.Normalize();
+        targetCameraZPosition = cameraZPosition;    // Start by assuming the camera should be at it's default distance
+        RaycastHit hit;                             // Create a variable to store information if we hit something (a wall, etc)
+        Vector3 direction = cameraObject.transform.position - cameraPivotTransform.position;    // Calculate the direction from the pivot to the camera
+        direction.Normalize();  // Make the direction vector length equal to 1 so it only keeps the direction and disregards the distance
 
-        if(Physics.SphereCast(cameraPivotTransform.position, cameraCollisionRadius, direction, out hit, Mathf.Abs(targetCameraZPosition), collideWithLayers))
+        // Shoots an invisible sphere from the pivot to the camera to check if anything is blocking the view
+        if(Physics.SphereCast(cameraPivotTransform.position, cameraCollisionRadius, direction, out hit, Mathf.Abs(targetCameraZPosition), collideWithLayers)) 
         {
-            float distanceFromHitObject = Vector3.Distance(cameraPivotTransform.position, hit.point);
-            targetCameraZPosition = -(distanceFromHitObject - cameraCollisionRadius);
+            float distanceFromHitObject = Vector3.Distance(cameraPivotTransform.position, hit.point); // Measures how far away the obstacle is from the pivot
+            targetCameraZPosition = -(distanceFromHitObject - cameraCollisionRadius);                 // Moves the camera closer (makes Z more negative) so it stops just before the obstacle
         } 
 
-        if(Mathf.Abs(targetCameraZPosition) < cameraCollisionRadius)
+        // If the camera would be to close (closer than the collision sphere size), keep it at minimum distance
+        if(Mathf.Abs(targetCameraZPosition) < cameraCollisionRadius)    
         {
             targetCameraZPosition = -cameraCollisionRadius;
         }
 
-        cameraObjectPosition.z = Mathf.Lerp(cameraObject.transform.localPosition.z, targetCameraZPosition, 0.2f);
-        cameraObject.transform.localPosition = cameraObjectPosition;
+        cameraObjectPosition.z = Mathf.Lerp(cameraObject.transform.localPosition.z, targetCameraZPosition, 0.2f);   // Smoothly move the camera's Z position toward the target position
+        cameraObject.transform.localPosition = cameraObjectPosition;                                                // Actually apply the new position to the camera
     }
 
 }

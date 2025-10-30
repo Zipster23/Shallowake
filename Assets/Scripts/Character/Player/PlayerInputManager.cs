@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class PlayerInputManager : MonoBehaviour
 {
     public static PlayerInputManager instance;
+    public PlayerManager player;
 
     PlayerControls playerControls;
 
@@ -114,6 +115,8 @@ public class PlayerInputManager : MonoBehaviour
         {
             moveAmount = 1;
         }
+
+        player.playerAnimatorManager.UpdateAnimatorMovementParameters(0, moveAmount);
     }
 
     private void HandleCameraMovementInput()
