@@ -10,6 +10,7 @@ public class PlayerInputManager : MonoBehaviour
 
     PlayerControls playerControls;
 
+    GameObject playerPrefab;
     PlayerManager player;
 
     [Header("Camera Movement Input")]
@@ -25,7 +26,7 @@ public class PlayerInputManager : MonoBehaviour
 
     [Header("Player Action Input")]
     [SerializeField] bool dodgeInput = false;
-    [SerializeField] bool sprintInput = false;
+    // [SerializeField] bool sprintInput = false;
 
     private void Awake()
     {
@@ -55,6 +56,8 @@ public class PlayerInputManager : MonoBehaviour
         if(newScene.buildIndex == WorldSaveGameManager.instance.GetWorldSceneIndex())
         {
             instance.enabled = true;
+            playerPrefab = GameObject.FindGameObjectWithTag("Player");
+            player = playerPrefab.GetComponent<PlayerManager>();
         }
         // Otherwise, we must be at the main menu scene. Disable our player controls.
         // This is so the player can't move around in the main menu scene.
@@ -75,11 +78,13 @@ public class PlayerInputManager : MonoBehaviour
 
             playerControls.PlayerActions.Dodge.performed += i => dodgeInput = true;
 
+            /*
             // Holding the input, activates sprinting
             playerControls.PlayerActions.Sprint.performed += i => sprintInput = true;
 
             // Releasing the input, deactivates sprinting
             playerControls.PlayerActions.Sprint.canceled += i => sprintInput = false;
+            */
         }
 
         playerControls.Enable();
