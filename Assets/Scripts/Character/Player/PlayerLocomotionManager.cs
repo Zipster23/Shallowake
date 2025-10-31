@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerLocomotionManager : CharacterLocomotionManager
 {
-    
+    // reference to player
     PlayerManager player;
     [HideInInspector] public float verticalMovement; // how much the player is pushing up and down
     [HideInInspector] public float horizontalMovement; // how much the player is pushing left and right
@@ -113,12 +113,14 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
         // if we are moving when we want to dodge, then we roll
         if (PlayerInputManager.instance.moveAmount > 0)
         {
-
+            // roll in the direction of camera
             rollDirection = PlayerCamera.instance.cameraObject.transform.forward * PlayerInputManager.instance.verticalInput;
             rollDirection += PlayerCamera.instance.cameraObject.transform.right * PlayerInputManager.instance.horizontalInput;
             rollDirection.y = 0;
+            // normalizing to prevent diagonals
             rollDirection.Normalize();
 
+            // make the player look in the direction of the roll
             Quaternion playerRotation = Quaternion.LookRotation(rollDirection);
             player.transform.rotation = playerRotation;
             

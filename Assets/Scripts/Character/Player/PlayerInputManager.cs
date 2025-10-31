@@ -10,6 +10,7 @@ public class PlayerInputManager : MonoBehaviour
 
     PlayerControls playerControls;
 
+    // player game object
     GameObject playerPrefab;
     PlayerManager player;
 
@@ -56,7 +57,9 @@ public class PlayerInputManager : MonoBehaviour
         if(newScene.buildIndex == WorldSaveGameManager.instance.GetWorldSceneIndex())
         {
             instance.enabled = true;
+            // get reference to player after we get to world scene
             playerPrefab = GameObject.FindGameObjectWithTag("Player");
+            // use player game object to get reference to player manager
             player = playerPrefab.GetComponent<PlayerManager>();
         }
         // Otherwise, we must be at the main menu scene. Disable our player controls.
@@ -76,6 +79,7 @@ public class PlayerInputManager : MonoBehaviour
             playerControls.PlayerMovement.Movement.performed += i => movementInput = i.ReadValue<Vector2>();
             playerControls.PlayerCamera.Movement.performed += i => cameraInput = i.ReadValue<Vector2>();
 
+            // dodge input
             playerControls.PlayerActions.Dodge.performed += i => dodgeInput = true;
 
             /*
@@ -153,8 +157,9 @@ public class PlayerInputManager : MonoBehaviour
     {
         if (dodgeInput)
         {
+            // disable dodge
             dodgeInput = false;
-
+            // call to movement
             player.playerLocomotionManager.AttemptToPerformDodge();
         }
     }
