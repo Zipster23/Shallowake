@@ -13,6 +13,7 @@ public class PlayerManager : CharacterManager
         base.Awake();
 
         playerLocomotionManager = GetComponent<PlayerLocomotionManager>();
+        playerAnimatorManager = GetComponent<PlayerAnimatorManager>();
     }
 
     protected override void Update()

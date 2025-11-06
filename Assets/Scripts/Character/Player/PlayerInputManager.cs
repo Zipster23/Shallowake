@@ -49,6 +49,9 @@ public class PlayerInputManager : MonoBehaviour
         if(newScene.buildIndex == WorldSaveGameManager.instance.GetWorldSceneIndex())
         {
             instance.enabled = true;
+
+            // Find the player when we load into the world scene
+            player = FindObjectOfType<PlayerManager>(); //
         }
         // Otherwise, we must be at the main menu scene. Disable our player controls.
         // This is so the player can't move around in the main menu scene.

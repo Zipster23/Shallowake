@@ -12,10 +12,10 @@ public class CharacterAnimatorManager : MonoBehaviour
         character = GetComponent<CharacterManager>();
     }
 
-    public void UpdateAnimatorMovementParameters(float horizontalValue, float verticalValue)
+    public void UpdateAnimatorMovementParameters(float horizontalMovement, float verticalMovement)
     {
-        character.animator.SetFloat("Horizontal", horizontalValue);
-        character.animator.SetFloat("Vertical", verticalValue);
+        character.animator.SetFloat("Horizontal", horizontalMovement);
+        character.animator.SetFloat("Vertical", verticalMovement);
     }
 
 }
