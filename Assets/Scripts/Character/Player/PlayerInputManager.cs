@@ -7,6 +7,7 @@ public class PlayerInputManager : MonoBehaviour
 {
     public static PlayerInputManager instance;
     public PlayerManager player;
+    public GameObject playerGameObject;
 
     PlayerControls playerControls;
 
@@ -51,7 +52,9 @@ public class PlayerInputManager : MonoBehaviour
             instance.enabled = true;
 
             // Find the player when we load into the world scene
-            player = FindObjectOfType<PlayerManager>(); //
+            playerGameObject = GameObject.FindWithTag("Player");
+            player = playerGameObject.GetComponent<PlayerManager>();
+            
         }
         // Otherwise, we must be at the main menu scene. Disable our player controls.
         // This is so the player can't move around in the main menu scene.
@@ -118,6 +121,9 @@ public class PlayerInputManager : MonoBehaviour
         {
             moveAmount = 1;
         }
+
+        if(player == null)
+            return;
 
         player.playerAnimatorManager.UpdateAnimatorMovementParameters(0, moveAmount);
     }
