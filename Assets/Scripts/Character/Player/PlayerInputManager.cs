@@ -6,13 +6,21 @@ using UnityEngine.SceneManagement;
 public class PlayerInputManager : MonoBehaviour
 {
     public static PlayerInputManager instance;
+    public PlayerManager player;
+    public GameObject playerGameObject;
 
     PlayerControls playerControls;
 
+    [Header("Player Movement Input")]
     [SerializeField] Vector2 movementInput;
-    [SerializeField] float verticalInput;
-    [SerializeField] float horizontalInput;
+    public float verticalInput;
+    public float horizontalInput;
     public float moveAmount;
+
+    [Header("Camera Movement Input")]
+    [SerializeField] Vector2 cameraInput;
+    public float cameraVerticalInput;
+    public float cameraHorizontalInput;
 
     private void Awake()
     {
@@ -42,6 +50,11 @@ public class PlayerInputManager : MonoBehaviour
         if(newScene.buildIndex == WorldSaveGameManager.instance.GetWorldSceneIndex())
         {
             instance.enabled = true;
+
+            // Find the player when we load into the world scene
+            playerGameObject = GameObject.FindWithTag("Player");
+            player = playerGameObject.GetComponent<PlayerManager>();
+            
         }
         // Otherwise, we must be at the main menu scene. Disable our player controls.
         // This is so the player can't move around in the main menu scene.
@@ -57,7 +70,8 @@ public class PlayerInputManager : MonoBehaviour
         {
             playerControls = new PlayerControls();
 
-            playerControls.PlayerMovement.Movement.performed += i => movementInput = i.ReadValue<Vector2>();;
+            playerControls.PlayerMovement.Movement.performed += i => movementInput = i.ReadValue<Vector2>();
+            playerControls.PlayerCamera.Movement.performed += i => cameraInput = i.ReadValue<Vector2>();
         }
 
         playerControls.Enable();
@@ -69,12 +83,29 @@ public class PlayerInputManager : MonoBehaviour
         SceneManager.activeSceneChanged -= OnSceneChange;
     }
 
-    private void Update()
+    // if we minimize game, stop adjusting inputs
+    private void OnApplicationFocus(bool focus)
     {
-        HandleMovementInput();
+        if(enabled)
+        {
+            if(focus)
+            {
+                playerControls.Enable();
+            }
+            else
+            {
+                playerControls.Disable();
+            }
+        }
     }
 
-    private void HandleMovementInput()
+    private void Update()
+    {
+        HandlePlayerMovementInput();
+        HandleCameraMovementInput();
+    }
+
+    private void HandlePlayerMovementInput()
     {
         verticalInput = movementInput.y;
         horizontalInput = movementInput.x;
@@ -90,6 +121,17 @@ public class PlayerInputManager : MonoBehaviour
         {
             moveAmount = 1;
         }
+
+        if(player == null)
+            return;
+
+        player.playerAnimatorManager.UpdateAnimatorMovementParameters(0, moveAmount);
+    }
+
+    private void HandleCameraMovementInput()
+    {
+        cameraVerticalInput = cameraInput.y;
+        cameraHorizontalInput = cameraInput.x;
     }
 
 }
