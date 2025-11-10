@@ -8,6 +8,8 @@ public class CharacterManager : MonoBehaviour
     [HideInInspector] public CharacterController characterController;
     [HideInInspector] public Animator animator;
 
+    [Header("Flags")]
+    public bool isPerformingAction = false;
     protected virtual void Awake()
     {
         DontDestroyOnLoad(this);
