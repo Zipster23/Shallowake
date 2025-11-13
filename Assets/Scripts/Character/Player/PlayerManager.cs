@@ -1,4 +1,4 @@
-    using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,6 +7,7 @@ public class PlayerManager : CharacterManager
    
     public PlayerAnimatorManager playerAnimatorManager;
     [HideInInspector] public PlayerLocomotionManager playerLocomotionManager;
+    [HideInInspector] public PlayerStatsManager playerStatsManager;
 
     protected override void Awake()
     {
@@ -14,6 +15,7 @@ public class PlayerManager : CharacterManager
 
         playerLocomotionManager = GetComponent<PlayerLocomotionManager>();
         playerAnimatorManager = GetComponent<PlayerAnimatorManager>();
+        playerStatsManager = GetComponent<PlayerStatsManager>();
     }
 
     protected override void Update()

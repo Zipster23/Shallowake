@@ -1,18 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UI_StatBar : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    
+    private Slider slider;
+    
+    protected virtual void Awake()
     {
-        
+        slider = GetComponent<Slider>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public virtual void SetStat(int newValue)
     {
-        
+        slider.value = newValue;
     }
+
+    public virtual void SetMaxStat(int maxValue)
+    {
+        slider.maxValue = maxValue;
+        slider.value = maxValue;
+    }
+
+    
+
 }
