@@ -21,18 +21,18 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Cobblestone_01
-  m_Shader: {fileID: 4800000, guid: fb897c55b88a5cc429a7d3a4a052c855, type: 3}
+  m_Shader: {fileID: 4800000, guid: ed5b0fede880ccf4b82136b0b2d1ca6f, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords:
+  m_ValidKeywords: []
+  m_InvalidKeywords:
   - _BOKASHIMODE_SPHERE
   - _DETAIL_MULX2
   - _PATTERNTYPE_LINES
-  m_InvalidKeywords:
   - _WINDQUALITY_NONE
   m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 1
+  m_EnableInstancingVariants: 1
+  m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
@@ -40,36 +40,35 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _MainTex:
+    - _NoiseTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _PatternTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _StrokeTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _BokashiMode: 2
-    - _BokashiModifier: 1
-    - _BokashiOffset: 0
-    - _BokashiStrength: 1
-    - _ColorMask: 15
-    - _LightStrength: 1
-    - _NoiseIntensity: 0.2
-    - _NoiseScale: 30
-    - _OutlineWidth: 0.005
-    - _PatternIntensity: 0.5
-    - _PatternScale: 20
-    - _PatternType: 3
-    - _Stencil: 0
-    - _StencilComp: 8
-    - _StencilOp: 0
-    - _StencilReadMask: 255
-    - _StencilWriteMask: 255
-    - _StrokeVariation: 0.3
-    - _UseUIAlphaClip: 0
-    - _ViewModifierBase: 0.5
+    - _BokashiMode: 1
+    - _BokashiStrength: 0.561
+    - _NoiseIntensity: 0.1
+    - _NoiseScale: 0.02
+    - _NoiseStrength: 0.25
+    - _OutlineWidth: 0.03
+    - _StrokeTexScale: 4
+    - _UseBokashi: 0
+    - _UseNoise: 0
+    - _UsePattern: 0
     m_Colors:
-    - _CenterPoint: {r: 0, g: 0, b: 0, a: 0}
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _DarkColor: {r: 0.19999996, g: 0.19999996, b: 0.29999998, a: 1}
+    - _CenterWorld: {r: 0, g: 0, b: 0, a: 1}
+    - _Color: {r: 1, g: 0.85, b: 0.6, a: 1}
+    - _LightPosWorld: {r: 0, g: 1, b: 0, a: 0}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
-    - _SecondaryColor: {r: 0.8, g: 0.8, b: 0.8, a: 1}
+    - _PatternTiling: {r: 1, g: 1, b: 0, a: 0}
+    - _StrokeColor: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
