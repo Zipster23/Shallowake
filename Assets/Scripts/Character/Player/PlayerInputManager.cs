@@ -49,21 +49,30 @@ public class PlayerInputManager : MonoBehaviour
 
     private void OnSceneChange(Scene oldScene, Scene newScene) 
     {
-        // If we are loading into our world scene, enable our player controls
-        if(newScene.buildIndex == WorldSaveGameManager.instance.GetWorldSceneIndex())
-        {
-            instance.enabled = true;
 
-            // Find the player when we load into the world scene
-            playerGameObject = GameObject.FindWithTag("Player");
-            player = playerGameObject.GetComponent<PlayerManager>();
-            
-        }
-        // Otherwise, we must be at the main menu scene. Disable our player controls.
-        // This is so the player can't move around in the main menu scene.
-        else
+        if (WorldSaveGameManager.instance != null)
         {
-            instance.enabled = false;
+
+            // If we are loading into our world scene, enable our player controls
+            if (newScene.buildIndex == WorldSaveGameManager.instance.GetWorldSceneIndex())
+            {
+                instance.enabled = true;
+
+                // Find the player when we load into the world scene
+                playerGameObject = GameObject.FindWithTag("Player");
+
+                if (playerGameObject != null)
+                {
+                    player = playerGameObject.GetComponent<PlayerManager>();
+                }
+
+            }
+            // Otherwise, we must be at the main menu scene. Disable our player controls.
+            // This is so the player can't move around in the main menu scene.
+            else
+            {
+                instance.enabled = false;
+            }
         }
     }
 
