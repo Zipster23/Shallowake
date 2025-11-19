@@ -85,11 +85,11 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
 
     public void AttemptToPerformDodge()
     {
-        /*
+        
         if (player.isPerformingAction)
         {
             return;
-        }*/
+        }
         // If we are moving when we attempt to dodge, we perform a roll
         if(PlayerInputManager.instance.moveAmount > 0)
         {
