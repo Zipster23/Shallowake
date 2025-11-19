@@ -4,28 +4,23 @@ using UnityEngine;
 
 public class PlayerUIManager : MonoBehaviour
 {
-    
+   
     public static PlayerUIManager instance;
 
-    [HideInInspector] public PlayerUIHudManager playerUIHUdManager;
+    [HideInInspector] public PlayerUIHudManager playerUIHudManager;
 
     private void Awake()
     {
-        if (instance == null)
+        if(instance == null)
         {
             instance = this;
-        } 
-        else 
+        }
+        else
         {
             Destroy(gameObject);
         }
 
-        playerUIHUdManager = GetComponentInChildren<PlayerUIHudManager>();
-    }
-
-    private void Start()
-    {
-        DontDestroyOnLoad(gameObject);
+        playerUIHudManager = GetComponentInChildren<PlayerUIHudManager>();
     }
 
 }

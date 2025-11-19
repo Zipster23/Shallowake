@@ -5,9 +5,10 @@ using UnityEngine;
 public class PlayerManager : CharacterManager
 {
    
-    public PlayerAnimatorManager playerAnimatorManager;
+    [HideInInspector] public PlayerAnimatorManager playerAnimatorManager;
     [HideInInspector] public PlayerLocomotionManager playerLocomotionManager;
     [HideInInspector] public PlayerStatsManager playerStatsManager;
+    
 
     protected override void Awake()
     {
