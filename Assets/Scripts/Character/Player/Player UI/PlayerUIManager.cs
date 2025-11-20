@@ -23,4 +23,11 @@ public class PlayerUIManager : MonoBehaviour
         playerUIHudManager = GetComponentInChildren<PlayerUIHudManager>();
     }
 
+    private void Start()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+
+
+
 }

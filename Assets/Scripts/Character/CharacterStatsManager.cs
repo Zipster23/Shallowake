@@ -15,7 +15,7 @@ public class CharacterStatsManager : MonoBehaviour
     [SerializeField] float staminaRegenerationDelay = 2;
     [SerializeField] float staminaRegenerationAmount = 2;
 
-    private float currentStamina = 0;
+    [SerializeField] private float currentStamina = 0;
 
     public float CurrentStamina
     {
@@ -47,10 +47,12 @@ public class CharacterStatsManager : MonoBehaviour
 
     public virtual void RegenerateStamina()
     {
+        /* ERASE THE COMMENT LATER THIS IS JUST BECAUSE ITS CAUSING AN ERROR
         if(character.isSprinting || character.isPerformingAction)
         {
             return;
         }
+        */
 
         staminaRegenerationTimer += Time.deltaTime;
 

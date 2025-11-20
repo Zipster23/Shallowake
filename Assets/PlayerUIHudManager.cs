@@ -7,9 +7,9 @@ public class PlayerUIHudManager : MonoBehaviour
 
     [SerializeField] UI_StatBar staminaBar;
 
-    public void SetNewStaminaValue(int oldValue, int newValue)
+    public void SetNewStaminaValue(float oldValue, float newValue)
     {
-        staminaBar.SetStat(newValue);
+        staminaBar.SetStat(Mathf.RoundToInt(newValue));
     }
 
     public void SetMaxStaminaValue(int maxStamina)
