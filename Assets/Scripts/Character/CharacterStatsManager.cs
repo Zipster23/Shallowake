@@ -5,59 +5,68 @@ using UnityEngine;
 public class CharacterStatsManager : MonoBehaviour
 {
     
-    CharacterManager character;
+    CharacterManager character; // reference to the CharacterManager component used to check character states (sprinting, dodging, backstepping, etc)
 
-    public int endurance = 1;
+    public int endurance = 1;   // stat variable. The higher the endurance, the more max stamina.
 
-    public int maxStamina = 0;
-    private float staminaRegenerationTimer = 0;
-    private float staminaTickTimer = 0;
-    [SerializeField] float staminaRegenerationDelay = 2;
-    [SerializeField] float staminaRegenerationAmount = 2;
+    public int maxStamina = 0;                              // maximum stamina a character can have
+    private float staminaRegenerationTimer = 0;             // tracks how long it's been since stamina last decreased to add a delay before stamina starts regenerating
+    private float staminaTickTimer = 0;                     // tracks time between each "tick" of stamina regeneration and prevents stamina from regenerating at once
+    [SerializeField] float staminaRegenerationDelay = 2;    // how many seconds to wait after stamina is used before it starts regenerating
+    [SerializeField] float staminaRegenerationAmount = 2;   // how much stamina to restore with each regeneration tick
 
-    [SerializeField] private float currentStamina = 0;
+    [SerializeField] private float currentStamina = 0;      // The character's current stamina value
 
+    // property that allows controlled access to currentStamina. Let's you run code whenever a value is read (get) or changed (set)
     public float CurrentStamina
     {
-        get {return currentStamina; }
+        // called when something reads currentStamina
+        get {return currentStamina; }  
 
+        // called when something changes currentStamina
         set{
-            ResetStaminaRegenTimer(currentStamina, value);
-            PlayerUIManager.instance.playerUIHudManager.SetNewStaminaValue(Mathf.RoundToInt(currentStamina), Mathf.RoundToInt(value));
-            currentStamina = value;
+            ResetStaminaRegenTimer(currentStamina, value);  // before updating stamina, reset the regen timer. This ensures stamina won't start regenerating right as it's being used
+            PlayerUIManager.instance.playerUIHudManager.SetNewStaminaValue(Mathf.RoundToInt(currentStamina), Mathf.RoundToInt(value));  // Updates the UI to show the new stamina value
+            currentStamina = value; // updates the actual value
         }
 
     }
 
     protected virtual void Awake()
     {
-        character = GetComponent<CharacterManager>();
+        character = GetComponent<CharacterManager>();   // gets the CharacterManager component used to check the character's current state (e.g. sprinting, dodging, etc)
     }
 
 
+    // calculates how much stamina the player should have based on the endurance variable
     public int CalculateStaminaBasedOnEnduranceLevel(int endurance)
     {
-        float stamina = 0;
+        float stamina = 0;  // stamina variable
 
-        // equation for how stamina is calculated
+        // simple equation for how stamina is calculated
         stamina = endurance * 10;
 
+        // convert the float result to an integer and return it
         return Mathf.RoundToInt(stamina);
     }
 
+    // handles the gradual regeneration of stamina over time
     public virtual void RegenerateStamina()
     {
         /* ERASE THE COMMENT LATER THIS IS JUST BECAUSE ITS CAUSING AN ERROR
+        // makes it so the player doesn't regenerate stamina if they're actively using it
         if(character.isSprinting || character.isPerformingAction)
         {
             return;
         }
         */
 
-        staminaRegenerationTimer += Time.deltaTime;
+        staminaRegenerationTimer += Time.deltaTime; // increases the regeneration timer by the time since last frame
 
+        // checks if enough time has passed since stamina was last used
         if(staminaRegenerationTimer >= staminaRegenerationDelay)
         {
+            // only regenerates stamina if stamina isn't already full
             if(CurrentStamina < maxStamina)
             {
                 staminaTickTimer += Time.deltaTime;
