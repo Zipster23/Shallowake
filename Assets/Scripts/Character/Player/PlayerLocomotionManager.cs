@@ -31,6 +31,10 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
 
     public void HandleAllMovement() // function that will handle all movement (grounded, aerial, etc)
     {
+        if (player.isPerformingAction)
+        {
+            return;
+        }
 
         HandleGroundedMovement();
         HandleRotation();
@@ -45,7 +49,11 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
 
     private void HandleGroundedMovement()
     {
-        
+        if (!player.canMove)
+        {
+            return;
+        }
+
         GetVerticalAndHorizontalInputs();
 
         moveDirection = PlayerCamera.instance.transform.forward * verticalMovement; // move relative to which way the player is facing
@@ -67,6 +75,11 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
 
     private void HandleRotation()
     {
+        if(!player.canRotate)
+        {
+            return;
+        }
+
         Vector3 targetRotationDirection = Vector3.zero;
         targetRotationDirection = PlayerCamera.instance.cameraObject.transform.forward * verticalMovement;
         targetRotationDirection = targetRotationDirection + PlayerCamera.instance.cameraObject.transform.right * horizontalMovement;
@@ -106,7 +119,7 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
         // If we are stationary, we perform a backstep
         else
         {
-            // Perform a backstep animation
+            player.playerAnimatorManager.PlayTargetActionAnimation("Back_Step_01", true, true);
         }
 
     }

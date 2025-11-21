@@ -21,7 +21,8 @@ public class CharacterAnimatorManager : MonoBehaviour
         character.animator.SetFloat("Vertical", verticalMovement, 0.1f, Time.deltaTime);
     }
 
-    public virtual void PlayTargetActionAnimation(string targetAnimation, bool isPerformingAction, bool applyRootMotion = true)
+    public virtual void PlayTargetActionAnimation(string targetAnimation, bool isPerformingAction, bool applyRootMotion = true,
+        bool canRotate = false, bool canMove = false)
     {
         character.animator.applyRootMotion = applyRootMotion;
         character.animator.CrossFade(targetAnimation, 0.2f);
@@ -30,6 +31,8 @@ public class CharacterAnimatorManager : MonoBehaviour
         // This flag will turn true if you are stunned
         // We can check for this before attempting new actions
         character.isPerformingAction = isPerformingAction;
+        character.canRotate = canRotate;
+        character.canMove = canMove;
     }
 
 }
