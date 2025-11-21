@@ -63,14 +63,15 @@ public class CharacterStatsManager : MonoBehaviour
 
         staminaRegenerationTimer += Time.deltaTime; // increases the regeneration timer by the time since last frame
 
-        // checks if enough time has passed since stamina was last used
+        // checks if enough time has passed since stamina was last used (e.g. starts regenerating stamina after x seconds)
         if(staminaRegenerationTimer >= staminaRegenerationDelay)
         {
             // only regenerates stamina if stamina isn't already full
             if(CurrentStamina < maxStamina)
             {
-                staminaTickTimer += Time.deltaTime;
+                staminaTickTimer += Time.deltaTime; // controls how often stamina regenerates. Time.deltaTime makes it so that the tick rate is consistent regardless of your FPS
 
+                // every 0.1 seconds, adds staminaRegnerationAmount.
                 if(staminaTickTimer >= 0.1f)
                 {
                     staminaTickTimer = 0;
@@ -80,12 +81,16 @@ public class CharacterStatsManager : MonoBehaviour
         }
     }
 
+    // resets the regeneration timer when stamina is used. This creates the delay before stamina starts regenerating again
     public virtual void ResetStaminaRegenTimer(float oldValue, float newValue)
     {
+        // only reset the timer if stamina is decreased 
         if(newValue < oldValue)
         {
-            staminaRegenerationTimer = 0;
+            staminaRegenerationTimer = 0;   // resets the timer back to 0 so that the player has to wait the full staminaRegenerationDelay before stamina starts regenerating again
         }
     }
 
 }
+
+
