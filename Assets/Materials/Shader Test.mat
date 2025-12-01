@@ -86,7 +86,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Texture:
-        m_Texture: {fileID: 2800000, guid: 2ea7d04d6c6c8804c94ee8488eede18b, type: 3}
+        m_Texture: {fileID: 2800000, guid: fa743f6c9def8d145b7be1619f376bd3, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -122,7 +122,7 @@ Material:
     - _GlossyReflections: 0
     - _Metallic: 0
     - _NoiseScale: 100
-    - _NoiseStrength: 0
+    - _NoiseStrength: 0.05
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _QueueControl: 0
