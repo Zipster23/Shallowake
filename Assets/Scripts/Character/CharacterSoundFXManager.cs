@@ -16,4 +16,9 @@ public class CharacterSoundFXManager : MonoBehaviour
     {
         audioSource.PlayOneShot(WorldSoundFXManager.instance.rollSFX);
     }
+
+    public void PlayBackstepSoundFX()
+    {
+        audioSource.PlayOneShot(WorldSoundFXManager.instance.backstepSFX);
+    }
 }

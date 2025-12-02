@@ -57,10 +57,11 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.24210526
+      - time: 0
         functionName: PlayRollSoundFX
         data: 
-        objectReferenceParameter: {instanceID: 0}
+        objectReferenceParameter: {fileID: 11500000, guid: 7046aa81aee312b4e9dd0e0c83701eb7,
+          type: 3}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0

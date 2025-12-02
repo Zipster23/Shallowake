@@ -8,6 +8,7 @@ public class WorldSoundFXManager : MonoBehaviour
 
     [Header("Action Sounds")]
     public AudioClip rollSFX;
+    public AudioClip backstepSFX;
 
     private void Awake()
     {

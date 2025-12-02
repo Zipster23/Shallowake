@@ -579,7 +579,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4eb4f9f73eb0f514e864deb76bcea466, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rollSFX: {fileID: 8300000, guid: b046d26db542051429a0279bceb65668, type: 3}
+  rollSFX: {fileID: 8300000, guid: 395a6a70bb9a7664b951a560c8ce9828, type: 3}
+  backstepSFX: {fileID: 8300000, guid: c04bb55c4eab54e45beaff902da72eb5, type: 3}
 --- !u!4 &990011006
 Transform:
   m_ObjectHideFlags: 0
