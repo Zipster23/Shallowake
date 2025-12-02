@@ -5,14 +5,12 @@ using UnityEngine;
 public class CharacterSoundFXManager : MonoBehaviour
 {
     private AudioSource audioSource;
-
     protected virtual void Awake()
     {
         audioSource = GetComponent<AudioSource>();
-        
     }
 
-    public void PlayRollSoundFX()
+    public void playRollSoundFX()
     {
         audioSource.PlayOneShot(WorldSoundFXManager.instance.rollSFX);
     }
