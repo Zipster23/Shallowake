@@ -6,6 +6,7 @@ public class PlayerUIManager : MonoBehaviour
 {
     
     public static PlayerUIManager instance;
+    public PlayerUIHudManager playerUIHudManager;
 
     private void Awake()
     {

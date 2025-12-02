@@ -58,7 +58,7 @@ ModelImporter:
       curves: []
       events:
       - time: 0
-        functionName: playRollSoundFX
+        functionName: PlayRollSoundFX
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: 7046aa81aee312b4e9dd0e0c83701eb7,
           type: 3}
