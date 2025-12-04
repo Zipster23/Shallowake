@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerAnimatorManager : CharacterAnimatorManager
 {
-    /*PlayerManager player;
+    PlayerManager player;
 
     protected override void Awake()
     {
@@ -22,5 +22,5 @@ public class PlayerAnimatorManager : CharacterAnimatorManager
             player.transform.rotation *= player.animator.deltaRotation;
         }
     }
-    */
+    
 }

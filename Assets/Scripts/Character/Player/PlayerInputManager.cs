@@ -24,6 +24,8 @@ public class PlayerInputManager : MonoBehaviour
 
     [Header("Player Action Input")]
     [SerializeField] bool dodgeInput = false;
+    [SerializeField] bool sprintInput = false;
+    public bool isSprinting = false;
 
     private void Awake()
     {
@@ -85,6 +87,9 @@ public class PlayerInputManager : MonoBehaviour
             playerControls.PlayerMovement.Movement.performed += i => movementInput = i.ReadValue<Vector2>();
             playerControls.PlayerCamera.Movement.performed += i => cameraInput = i.ReadValue<Vector2>();
             playerControls.PlayerActions.Dodge.performed += i => dodgeInput = true;
+
+            playerControls.PlayerActions.Sprint.performed += i => sprintInput = true;   // holding the input sets the bool to true (sprinting) 
+            playerControls.PlayerActions.Sprint.canceled += i => sprintInput = false;   // releasing the input sets the bool to false (stops sprinting) 
         }
 
         playerControls.Enable();
@@ -122,6 +127,7 @@ public class PlayerInputManager : MonoBehaviour
         HandleCameraMovementInput();
         HandlePlayerMovementInput();
         HandleDodgeInput();
+        HandleSprintingInput();
     }
 
     // Movement
@@ -145,7 +151,7 @@ public class PlayerInputManager : MonoBehaviour
         if(player == null)
             return;
 
-        player.playerAnimatorManager.UpdateAnimatorMovementParameters(0, moveAmount);
+        player.playerAnimatorManager.UpdateAnimatorMovementParameters(0, moveAmount, player.playerInputManager.isSprinting);
     }
 
     private void HandleCameraMovementInput()
@@ -165,6 +171,18 @@ public class PlayerInputManager : MonoBehaviour
             // Future Note: Return (Do Nothing) if Menu UI Window is Open
             // Perform a dodge
             player.playerLocomotionManager.AttemptToPerformDodge();
+        }
+    }
+
+    private void HandleSprintingInput()
+    {
+        if(sprintInput)
+        {
+            player.playerLocomotionManager.HandleSprinting();
+        }
+        else
+        {
+            player.playerInputManager.isSprinting = false;
         }
     }
 
