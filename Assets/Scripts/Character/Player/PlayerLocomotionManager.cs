@@ -62,6 +62,8 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
         moveDirection.Normalize(); // makes sure the player doesn't move faster diagonally
         moveDirection.y = 0; // keeps movement horizontal
 
+        Debug.Log($"isSprinting: {player.playerInputManager.isSprinting}, moveAmount: {PlayerInputManager.instance.moveAmount}");
+
         if(player.playerInputManager.isSprinting)
         {   
             // move at a running speed
@@ -113,7 +115,7 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
             player.playerInputManager.isSprinting = false;
         }
 
-        if(moveAmount >= 0.5)
+        if(PlayerInputManager.instance.moveAmount >= 0.5)
         {
             player.playerInputManager.isSprinting = true;
         }
@@ -130,6 +132,9 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
         {
             return;
         }
+
+        player.playerInputManager.isSprinting = false;
+
         // If we are moving when we attempt to dodge, we perform a roll
         if(PlayerInputManager.instance.moveAmount > 0)
         {
