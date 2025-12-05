@@ -62,8 +62,6 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
         moveDirection.Normalize(); // makes sure the player doesn't move faster diagonally
         moveDirection.y = 0; // keeps movement horizontal
 
-        Debug.Log($"isSprinting: {player.playerInputManager.isSprinting}, moveAmount: {PlayerInputManager.instance.moveAmount}");
-
         if(player.playerInputManager.isSprinting)
         {   
             // move at a running speed

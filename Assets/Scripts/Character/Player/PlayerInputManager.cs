@@ -174,15 +174,17 @@ public class PlayerInputManager : MonoBehaviour
         }
     }
 
+    // checks if the player is holding down the sprint button and handles sprinting logic
     private void HandleSprintingInput()
     {
+        // checks if the sprint button is being held down
         if(sprintInput)
         {
-            player.playerLocomotionManager.HandleSprinting();
+            player.playerLocomotionManager.HandleSprinting();   // if the sprint button is held, call the HandleSprinting method
         }
         else
-        {
-            player.playerInputManager.isSprinting = false;
+        {   
+            player.playerInputManager.isSprinting = false;      // if the sprint button is not being held, set isSprinting to false, making the player return to normal walking speed and animations
         }
     }
 
