@@ -106,20 +106,23 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
         transform.rotation = targetRotation;
     }
 
+    // method determines whether the player should be sprinting
     public void HandleSprinting()
     {
+        // checks if the player is performing an action (e.g. dodging, backstep, attacking)
         if(player.isPerformingAction)
         {
-            player.playerInputManager.isSprinting = false;
+            player.playerInputManager.isSprinting = false;  // set isSprinting to false so the player can't sprint while performing an action
         }
 
+        // checks if the player is moving (0.5 ensures they're at least walking)
         if(PlayerInputManager.instance.moveAmount >= 0.5)
         {
-            player.playerInputManager.isSprinting = true;
+            player.playerInputManager.isSprinting = true;   // set isSprinting to true so the player moves at sprinting speed
         }
         else
         {
-            player.playerInputManager.isSprinting = false;
+            player.playerInputManager.isSprinting = false;  // if barely moving or standing still, set isSprinting to false so they don't move at sprinting speed
         }
     }
 
