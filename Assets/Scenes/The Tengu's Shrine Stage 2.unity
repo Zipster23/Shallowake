@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1485173096}
-  m_IndirectSpecularColor: {r: 0.10716669, g: 0.080483496, b: 0.04199028, a: 1}
+  m_IndirectSpecularColor: {r: 0.008578965, g: 0.013259435, b: 0.015367597, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5080,13 +5080,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1485173095}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.38841012, y: -0.104694046, z: 0.20095968, w: 0.893192}
+  m_LocalRotation: {x: -0.39290026, y: 0.08426997, z: -0.19203612, w: -0.8953492}
   m_LocalPosition: {x: 9.4, y: 199.88939, z: -239.65688}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: -386.978, y: -178.012, z: -154.764}
+  m_LocalEulerAnglesHint: {x: -227.386, y: -180, z: -155.789}
 --- !u!114 &1485173098
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6977,6 +6977,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409496, guid: f6d148d888ffbf54b9afe9936dfaec1f,
         type: 3}
+      propertyPath: m_FOVAxisMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8944336655422409496, guid: f6d148d888ffbf54b9afe9936dfaec1f,
+        type: 3}
       propertyPath: m_FocalLength
       value: 72.29987
       objectReference: {fileID: 0}
@@ -7002,13 +7007,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409496, guid: f6d148d888ffbf54b9afe9936dfaec1f,
         type: 3}
+      propertyPath: near clip plane
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8944336655422409496, guid: f6d148d888ffbf54b9afe9936dfaec1f,
+        type: 3}
       propertyPath: orthographic size
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409496, guid: f6d148d888ffbf54b9afe9936dfaec1f,
         type: 3}
       propertyPath: m_projectionMatrixMode
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409498, guid: f6d148d888ffbf54b9afe9936dfaec1f,
         type: 3}
