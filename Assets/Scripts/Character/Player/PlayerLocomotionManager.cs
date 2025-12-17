@@ -18,7 +18,8 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
     [SerializeField] float walkingSpeed = 2;
     [SerializeField] float runningSpeed = 5;
     [SerializeField] float sprintingSpeed = 7.5f;
-    [SerializeField] float rotationSpeed = 15;
+    [SerializeField] float rotationSpeed = 7.5f;
+    [SerializeField] int sprintingStaminaCost = 2;
 
     [Header("Dodge")]
     private Vector3 rollDirection;
@@ -115,6 +116,12 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
             player.playerInputManager.isSprinting = false;  // set isSprinting to false so the player can't sprint while performing an action
         }
 
+        if(player.characterStatsManager.CurrentStamina <= 0)
+        {
+            player.playerInputManager.isSprinting = false;
+            return;
+        }
+
         // checks if the player is moving (0.5 ensures they're at least walking)
         if(PlayerInputManager.instance.moveAmount >= 0.5)
         {
@@ -123,6 +130,11 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
         else
         {
             player.playerInputManager.isSprinting = false;  // if barely moving or standing still, set isSprinting to false so they don't move at sprinting speed
+        }
+
+        if(player.playerInputManager.isSprinting)
+        {
+            player.characterStatsManager.CurrentStamina -= sprintingStaminaCost * Time.deltaTime;
         }
     }
 

@@ -19692,6 +19692,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4132196057893294684, guid: 532fa9f507370a845a24213b632b8ba7,
+        type: 3}
+      propertyPath: rotationSpeed
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4648885851839168990, guid: 532fa9f507370a845a24213b632b8ba7,
         type: 3}
       propertyPath: applyRootMotion

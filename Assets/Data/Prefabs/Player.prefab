@@ -2814,6 +2814,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 329927649456156450}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7330af598d44e2f48ba6259d83ecd04b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 84299256666714982}
   m_SourcePrefab: {fileID: 100100000, guid: 7330af598d44e2f48ba6259d83ecd04b, type: 3}
 --- !u!1 &1196044179144028782 stripped
 GameObject:
@@ -2838,6 +2842,7 @@ MonoBehaviour:
   moveAmount: 0
   walkingSpeed: 2
   runningSpeed: 5
+  sprintingSpeed: 7.5
   rotationSpeed: 15
 --- !u!114 &4648885851839168990
 MonoBehaviour:
@@ -2859,6 +2864,8 @@ MonoBehaviour:
   canMove: 1
   playerAnimatorManager: {fileID: 0}
   playerLocomotionManager: {fileID: 0}
+  playerInputManager: {fileID: 0}
+  characterStatsManager: {fileID: 0}
 --- !u!143 &6124919035941306535
 CharacterController:
   m_ObjectHideFlags: 0
@@ -3026,6 +3033,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4899c00db131904981bbc787676639f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &84299256666714982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1196044179144028782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fcffde46ee183b4a9c6950ccac2e3cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  endurance: 10
+  maxStamina: 0
+  staminaRegenerationDelay: 2
+  staminaRegenerationAmount: 2
+  currentStamina: 0
 --- !u!4 &2004914873825093844 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 7330af598d44e2f48ba6259d83ecd04b,
