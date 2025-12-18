@@ -23,6 +23,7 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
 
     [Header("Dodge")]
     private Vector3 rollDirection;
+    [SerializeField] float dodgeStaminaCost = 25;
 
     protected override void Awake()
     {
@@ -146,6 +147,14 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
             return;
         }
 
+        // Check if player has enough stamina to dodge
+        if(player.characterStatsManager.CurrentStamina < dodgeStaminaCost)
+        {
+            return; // not enough stamina, can't dodge
+        }
+
+        player.characterStatsManager.CurrentStamina -= dodgeStaminaCost;    // deduct stamina cost for dodging
+
         player.playerInputManager.isSprinting = false;
 
         // If we are moving when we attempt to dodge, we perform a roll
@@ -166,6 +175,8 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
         {
             player.playerAnimatorManager.PlayTargetActionAnimation("Back_Step_01", true, true);
         }
+
+
 
     }
 

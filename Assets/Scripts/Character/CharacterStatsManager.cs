@@ -53,13 +53,24 @@ public class CharacterStatsManager : MonoBehaviour
     // handles the gradual regeneration of stamina over time
     public virtual void RegenerateStamina()
     {
-        /* ERASE THE COMMENT LATER THIS IS JUST BECAUSE ITS CAUSING AN ERROR
-        // makes it so the player doesn't regenerate stamina if they're actively using it
-        if(character.isSprinting || character.isPerformingAction)
+        // Don't regenerate stamina if the character is performing an action
+        if(character.isPerformingAction)
         {
             return;
         }
-        */
+
+
+        // Check if this character is a player. If it is a player and the player is sprinting, don't regenerate stamina.
+        PlayerManager player = GetComponent<PlayerManager>();
+        if(player != null)
+        {
+            if(player.playerInputManager.isSprinting)
+            {
+                return;
+            }
+        }
+
+
 
         staminaRegenerationTimer += Time.deltaTime; // increases the regeneration timer by the time since last frame
 
