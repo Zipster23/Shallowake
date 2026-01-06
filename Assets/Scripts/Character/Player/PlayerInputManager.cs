@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 public class PlayerInputManager : MonoBehaviour
 {
@@ -26,6 +27,7 @@ public class PlayerInputManager : MonoBehaviour
     [SerializeField] bool dodgeInput = false;
     [SerializeField] bool sprintInput = false;
     public bool isSprinting = false;
+    public InputAction drawWeaponAction;
 
     private void Awake()
     {
@@ -187,5 +189,4 @@ public class PlayerInputManager : MonoBehaviour
             player.playerInputManager.isSprinting = false;      // if the sprint button is not being held, set isSprinting to false, making the player return to normal walking speed and animations
         }
     }
-
 }
