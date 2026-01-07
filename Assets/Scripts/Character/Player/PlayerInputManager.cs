@@ -27,7 +27,7 @@ public class PlayerInputManager : MonoBehaviour
     [SerializeField] bool dodgeInput = false;
     [SerializeField] bool sprintInput = false;
     public bool isSprinting = false;
-    public InputAction drawWeaponAction;
+    public bool drawSheatheWeaponInput = false;
 
     private void Awake()
     {
@@ -92,6 +92,8 @@ public class PlayerInputManager : MonoBehaviour
 
             playerControls.PlayerActions.Sprint.performed += i => sprintInput = true;   // holding the input sets the bool to true (sprinting) 
             playerControls.PlayerActions.Sprint.canceled += i => sprintInput = false;   // releasing the input sets the bool to false (stops sprinting) 
+            playerControls.PlayerActions.DrawWeapon.performed += i => drawSheatheWeaponInput = true;
+        
         }
 
         playerControls.Enable();
@@ -187,6 +189,17 @@ public class PlayerInputManager : MonoBehaviour
         else
         {   
             player.playerInputManager.isSprinting = false;      // if the sprint button is not being held, set isSprinting to false, making the player return to normal walking speed and animations
+        }
+    }
+
+    private void HandleDrawSheatheInput()
+    {
+        if(drawSheatheWeaponInput)
+        {
+            player.weaponModelInstantiation.LoadWeapon();
+        } else
+        {
+
         }
     }
 }
