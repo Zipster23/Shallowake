@@ -199,7 +199,7 @@ public class PlayerInputManager : MonoBehaviour
             player.weaponModelInstantiation.LoadWeapon();
         } else
         {
-
+            player.weaponModelInstantiation.UnloadWeapon();
         }
     }
 }
