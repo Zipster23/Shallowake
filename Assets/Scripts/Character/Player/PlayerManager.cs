@@ -19,7 +19,7 @@ public class PlayerManager : CharacterManager
         playerLocomotionManager = GetComponent<PlayerLocomotionManager>();
         playerAnimatorManager = GetComponent<PlayerAnimatorManager>();
         characterStatsManager = GetComponent<CharacterStatsManager>();
-        weaponModelInstantiation = GetComponent<WeaponModelInstantiation>();
+        weaponModelInstantiation = GetComponentInChildren<WeaponModelInstantiation>();
 
         playerInputManager = PlayerInputManager.instance;
     }
