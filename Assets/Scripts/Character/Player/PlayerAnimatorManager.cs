@@ -15,11 +15,6 @@ public class PlayerAnimatorManager : CharacterAnimatorManager
 
     private void OnAnimatorMove()
     {
-        if(player == null)
-        {
-            return;
-        }
-
         if(player.applyRootMotion)
         {
             Vector3 velocity = player.animator.deltaPosition;

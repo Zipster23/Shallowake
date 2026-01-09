@@ -19,7 +19,7 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
     [SerializeField] float runningSpeed = 5;
     [SerializeField] float sprintingSpeed = 7.5f;
     [SerializeField] float rotationSpeed = 7.5f;
-    [SerializeField] int sprintingStaminaCost = 8;
+    [SerializeField] int sprintingStaminaCost = 2;
 
     [Header("Dodge")]
     private Vector3 rollDirection;
@@ -117,7 +117,6 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
             player.playerInputManager.isSprinting = false;  // set isSprinting to false so the player can't sprint while performing an action
         }
 
-        // If the character has no stamina, stop it from sprinting
         if(player.characterStatsManager.CurrentStamina <= 0)
         {
             player.playerInputManager.isSprinting = false;
@@ -134,7 +133,6 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
             player.playerInputManager.isSprinting = false;  // if barely moving or standing still, set isSprinting to false so they don't move at sprinting speed
         }
 
-        // If sprinting, gradually reduce the player's stamina by the sprintingStaminaCost
         if(player.playerInputManager.isSprinting)
         {
             player.characterStatsManager.CurrentStamina -= sprintingStaminaCost * Time.deltaTime;
