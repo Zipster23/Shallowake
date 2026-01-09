@@ -550,6 +550,52 @@ RectTransform:
   m_AnchoredPosition: {x: 14, y: 285}
   m_SizeDelta: {x: 360, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &990011004
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 990011006}
+  - component: {fileID: 990011005}
+  m_Layer: 0
+  m_Name: World Sound FX Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &990011005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 990011004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4eb4f9f73eb0f514e864deb76bcea466, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rollSFX: {fileID: 8300000, guid: 395a6a70bb9a7664b951a560c8ce9828, type: 3}
+  backstepSFX: {fileID: 8300000, guid: c04bb55c4eab54e45beaff902da72eb5, type: 3}
+--- !u!4 &990011006
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 990011004}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1190832699
 GameObject:
   m_ObjectHideFlags: 0
@@ -1261,6 +1307,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4814779082572868817, guid: c5afc987127f88043b7fd547e308bb7a,
+        type: 3}
+      propertyPath: playerGameObject
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1274,10 +1325,40 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 693581007344875536, guid: 0767d5feccaf25848a169fbfc4e145c2,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 693581007344875536, guid: 0767d5feccaf25848a169fbfc4e145c2,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 693581007344875536, guid: 0767d5feccaf25848a169fbfc4e145c2,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 693581007344875536, guid: 0767d5feccaf25848a169fbfc4e145c2,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2774540859889024230, guid: 0767d5feccaf25848a169fbfc4e145c2,
         type: 3}
       propertyPath: m_Name
       value: Player UI Manager
+      objectReference: {fileID: 0}
+    - target: {fileID: 2841351946828156629, guid: 0767d5feccaf25848a169fbfc4e145c2,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2841351946828156629, guid: 0767d5feccaf25848a169fbfc4e145c2,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5746871965310279296, guid: 0767d5feccaf25848a169fbfc4e145c2,
         type: 3}
@@ -1327,6 +1408,21 @@ PrefabInstance:
     - target: {fileID: 5746871965310279296, guid: 0767d5feccaf25848a169fbfc4e145c2,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6348950881003476498, guid: 0767d5feccaf25848a169fbfc4e145c2,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6348950881003476498, guid: 0767d5feccaf25848a169fbfc4e145c2,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6348950881003476498, guid: 0767d5feccaf25848a169fbfc4e145c2,
+        type: 3}
+      propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1496,3 +1592,4 @@ SceneRoots:
   - {fileID: 7329098102220349836}
   - {fileID: 5490291939757698397}
   - {fileID: 7362833554517443025}
+  - {fileID: 990011006}
