@@ -13,13 +13,11 @@ public class WeaponModelInstantiation : MonoBehaviour
     public void LoadWeapon()
     {
         gameObject.SetActive(true);
-        /*
-        weaponModel.transform.parent = transform;
+        gameObject.transform.parent = transform;
 
-        weaponModel.transform.localPosition = Vector3.zero;
-        weaponModel.transform.localRotation = Quaternion.identity;
-        weaponModel.transform.localScale = Vector3.one;
-        */
+        gameObject.transform.localPosition = Vector3.zero;
+        gameObject.transform.localRotation = Quaternion.identity;
+        gameObject.transform.localScale = Vector3.one;
     }
 
 }
