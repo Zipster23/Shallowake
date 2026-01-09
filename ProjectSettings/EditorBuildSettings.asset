@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Scene_Main_Menu_01.unity
     guid: c3efcf2886978cc40b23eff9ca69051a
   - enabled: 1
+    path: Assets/Scenes/The Tengu's Shrine Stage 2.unity
+    guid: 57f4e7422da2f0946b5713fd410ffd71
+  - enabled: 1
     path: Assets/Scenes/Scene_World_01.unity
-    guid: 6e57ba95ff394f64d95769ca1a7d854a
+    guid: b0811672e7143a445b024fad35850728
   m_configObjects: {}
