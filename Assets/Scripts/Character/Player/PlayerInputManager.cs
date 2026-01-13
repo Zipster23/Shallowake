@@ -25,6 +25,7 @@ public class PlayerInputManager : MonoBehaviour
     [Header("Player Action Input")]
     [SerializeField] bool dodgeInput = false;
     [SerializeField] bool sprintInput = false;
+    [SerializeField] bool jumpInput = false;
     public bool isSprinting = false;
 
     private void Awake()
@@ -87,6 +88,7 @@ public class PlayerInputManager : MonoBehaviour
             playerControls.PlayerMovement.Movement.performed += i => movementInput = i.ReadValue<Vector2>();
             playerControls.PlayerCamera.Movement.performed += i => cameraInput = i.ReadValue<Vector2>();
             playerControls.PlayerActions.Dodge.performed += i => dodgeInput = true;
+            playerControls.PlayerActions.Jump.performed += i => jumpInput = true;
 
             playerControls.PlayerActions.Sprint.performed += i => sprintInput = true;   // holding the input sets the bool to true (sprinting) 
             playerControls.PlayerActions.Sprint.canceled += i => sprintInput = false;   // releasing the input sets the bool to false (stops sprinting) 
@@ -127,7 +129,7 @@ public class PlayerInputManager : MonoBehaviour
         HandleCameraMovementInput();
         HandlePlayerMovementInput();
         HandleDodgeInput();
-        HandleSprintingInput();
+        HandleSprintInput();
     }
 
     // Movement
@@ -175,7 +177,7 @@ public class PlayerInputManager : MonoBehaviour
     }
 
     // checks if the player is holding down the sprint button and handles sprinting logic
-    private void HandleSprintingInput()
+    private void HandleSprintInput()
     {
         // checks if the sprint button is being held down
         if(sprintInput)
@@ -186,6 +188,18 @@ public class PlayerInputManager : MonoBehaviour
         {   
             player.playerInputManager.isSprinting = false;      // if the sprint button is not being held, set isSprinting to false, making the player return to normal walking speed and animations
         }
+    }
+
+    private void HandleJumpInput()
+    {
+        if(jumpInput)
+        {
+            jumpInput = false;
+
+            player.playerLocomotionManager.AttemptToPerformJump();
+        }
+
+
     }
 
 }

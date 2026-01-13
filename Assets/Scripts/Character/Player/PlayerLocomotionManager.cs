@@ -24,6 +24,7 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
     [Header("Dodge")]
     private Vector3 rollDirection;
     [SerializeField] float dodgeStaminaCost = 25;
+    [SerializeField] float jumpStaminaCost = 25;
 
     protected override void Awake()
     {
@@ -177,8 +178,42 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
         {
             player.playerAnimatorManager.PlayTargetActionAnimation("Back_Step_01", true, true);
         }
+    }
 
+    public void AttemptToPerformJump()
+    {
 
+        if (player.isPerformingAction)
+        {
+            return;
+        }
+
+        // Check if player has enough stamina to jump
+        if(player.characterStatsManager.CurrentStamina < jumpStaminaCost)
+        {
+            return; // not enough stamina, can't jump
+        }
+
+        if(player.isJumping)
+        {
+            return;
+        }
+
+        if(player.isGrounded)
+        {
+            return;
+        }
+
+        player.playerAnimatorManager.PlayTargetActionAnimation("Main_Jump_01", false);
+
+        player.isJumping = true;
+
+        player.characterStatsManager.CurrentStamina -= jumpStaminaCost;    // deduct stamina cost for jumping
+
+    }
+
+    public void ApplyJumpingVelocity()
+    {
 
     }
 
