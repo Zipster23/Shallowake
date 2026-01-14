@@ -8,7 +8,7 @@ public class CharacterLocomotionManager : MonoBehaviour
     CharacterManager character;
 
     [Header("Ground & Jumping")]
-    [SerializeField] float gravityForce = -5.55f;
+    [SerializeField] protected float gravityForce = -5.55f;
     [SerializeField] LayerMask groundLayer;
     [SerializeField] float groundCheckSphereRadius = 1;
     [SerializeField] protected Vector3 yVelocity;               // the force at which our character is pulled up or down (jumping or falling)
@@ -31,9 +31,11 @@ public class CharacterLocomotionManager : MonoBehaviour
             // if we are not attempting to jump or move upward
             if(yVelocity.y < 0)
             {
+                Debug.Log("Player landed - resetting jump");
                 inAirTimer = 0;
                 fallingVelocityHasBeenSet = false;
                 yVelocity.y = groundedYVelocity;
+                character.isJumping = false;
             }
         }
         else
@@ -49,8 +51,10 @@ public class CharacterLocomotionManager : MonoBehaviour
             character.animator.SetFloat("InAirTimer", inAirTimer);
 
             yVelocity.y += gravityForce * Time.deltaTime;
-            character.characterController.Move(yVelocity * Time.deltaTime);
         }
+
+        // there should always be a downwards force applied to the y velocity
+        character.characterController.Move(yVelocity * Time.deltaTime);
     }
 
     protected void HandleGroundCheck()

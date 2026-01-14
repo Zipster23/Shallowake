@@ -14,7 +14,7 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
     [Header("Movement Settings")]
     private Vector3 moveDirection;
     private Vector3 targetRotationDirection;
-    // sets "test" integers for walking and running speed
+    [SerializeField] float jumpHeight = 4;
     [SerializeField] float walkingSpeed = 2;
     [SerializeField] float runningSpeed = 5;
     [SerializeField] float sprintingSpeed = 7.5f;
@@ -199,7 +199,7 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
             return;
         }
 
-        if(player.isGrounded)
+        if(!player.isGrounded)
         {
             return;
         }
@@ -214,6 +214,8 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
 
     public void ApplyJumpingVelocity()
     {
+
+        yVelocity.y = Mathf.Sqrt(jumpHeight * (-2) * gravityForce);
 
     }
 

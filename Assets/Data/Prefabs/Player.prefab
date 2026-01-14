@@ -2851,7 +2851,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b53a21a33df56e40a4f89e60a78c912, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gravityForce: -5.55
+  gravityForce: -40
   groundLayer:
     serializedVersion: 2
     m_Bits: 1
