@@ -10,9 +10,15 @@ public class CharacterEffectsManager : MonoBehaviour
 
     // Process Static Effects (Adding/Removing Buffs from Talismans etc.)
 
-    public void ProcessInstantEffect()
+    CharacterStatsManager character;
+
+    protected virtual void Awake()
     {
-        // Take in an Effect
-        // Process it
+        character = GetComponent<CharacterStatsManager>();
+    }
+
+    public void ProcessInstantEffect(InstantCharacterEffect effect)
+    {
+        effect.ProcessEffect(character);
     }
 }

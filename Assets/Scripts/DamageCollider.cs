@@ -15,15 +15,45 @@ public class DamageCollider : MonoBehaviour
     protected Vector3 contactPoint;
 
     [Header("Characters Damaged")]
-    protected List<CharacterManager> charactersDamaged = new List<CharacterManager>();
+    protected List<CharacterStatsManager> charactersDamaged = new List<CharacterStatsManager>();
+
 
     private void OnTriggerEnter(Collider other)
     {
-        
+        CharacterStatsManager damageTarget = other.GetComponent<CharacterStatsManager>();
+
+        if (damageTarget != null ) 
+        {
+            contactPoint = other.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
+
+            // Check if we can damage this target based on friendly fire
+
+            // Check if target is bloking
+
+            // Check if target is invulnerable
+
+            // Damage
+
+            DamageTarget(damageTarget);
+        }
     }
 
-    protected virtual void DamageTarget(CharacterManager damageTarget)
+    protected virtual void DamageTarget(CharacterStatsManager damageTarget)
     {
+        // We don't want to damage the same target more than once in a single attack
+        // So we add them to a list that checks before applying damage
+        if (charactersDamaged.Contains(damageTarget))
+            return;
 
+        charactersDamaged.Add(damageTarget);
+
+        TakeDamageEffect damageEffect = Instantiate(WorldCharacterEffectsManager.instance.takeDamageEffect);
+        damageEffect.physicalDamage = physicalDamage;
+        damageEffect.magicDamage = magicDamage;
+        damageEffect.fireDamage = fireDamage;
+        damageEffect.holyDamage = holyDamage;
+        damageEffect.contactPoint = contactPoint;
+
+        damageTarget.characterEffectsManager.ProcessInstantEffect(damageEffect);
     }
 }

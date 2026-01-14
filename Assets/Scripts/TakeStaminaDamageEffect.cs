@@ -13,6 +13,7 @@ public class TakeStaminaDamageEffect : InstantCharacterEffect
 
     private void CalculateStaminaDamage(CharacterStatsManager character)
     {
+        Debug.Log("Character is taking: " + staminaDamage + " Stamina Damage");
         character.CurrentStamina -= staminaDamage;
     }
 }

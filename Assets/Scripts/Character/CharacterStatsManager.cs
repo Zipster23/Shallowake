@@ -1,11 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
 public class CharacterStatsManager : MonoBehaviour
 {
-    
+    [Header("Status")]
+    public bool isDead = false;
+
+    public int currentHealth;
+
     CharacterManager character; // reference to the CharacterManager component used to check character states (sprinting, dodging, backstepping, etc)
+
+    [HideInInspector] public CharacterEffectsManager characterEffectsManager;
 
     public int endurance = 1;   // stat variable. The higher the endurance, the more max stamina.
 
@@ -35,6 +42,7 @@ public class CharacterStatsManager : MonoBehaviour
     protected virtual void Awake()
     {
         character = GetComponent<CharacterManager>();   // gets the CharacterManager component used to check the character's current state (e.g. sprinting, dodging, etc)
+        characterEffectsManager = GetComponent<CharacterEffectsManager>();
     }
 
 
