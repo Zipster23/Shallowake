@@ -9,7 +9,7 @@ public class PlayerManager : CharacterManager
     [HideInInspector] public PlayerLocomotionManager playerLocomotionManager;
     [HideInInspector] public PlayerInputManager playerInputManager;
     [HideInInspector] public CharacterStatsManager characterStatsManager;
-    [SerializeField] public WeaponModelInstantiation weaponModelInstantiation;
+    [SerializeField] public PlayerAttackManager playerAttackManager;
     
 
     protected override void Awake()
@@ -19,7 +19,7 @@ public class PlayerManager : CharacterManager
         playerLocomotionManager = GetComponent<PlayerLocomotionManager>();
         playerAnimatorManager = GetComponent<PlayerAnimatorManager>();
         characterStatsManager = GetComponent<CharacterStatsManager>();
-        weaponModelInstantiation = GetComponentInChildren<WeaponModelInstantiation>();
+        playerAttackManager = GetComponent<PlayerAttackManager>();
 
         playerInputManager = PlayerInputManager.instance;
     }

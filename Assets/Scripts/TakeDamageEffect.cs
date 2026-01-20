@@ -7,7 +7,7 @@ using UnityEngine;
 public class TakeDamageEffect : InstantCharacterEffect
 {
     [Header("Character Causing Damage")]
-    public CharacterManager characterCausignDamage; // if the damage is caused by another characterse attack it will be stored here
+    public CharacterManager characterCausingDamage; // if the damage is caused by another characterse attack it will be stored here
 
     [Header("Damage")]
     public float physicalDamage = 0; // (In the future will be split into "Standard", "Strike", "Slash", and "Pierce"
@@ -17,7 +17,7 @@ public class TakeDamageEffect : InstantCharacterEffect
     public float holyDamage = 0;
 
     [Header("Final Damage")]
-    private int finalDamageDealt = 0; // THe damage the character takes after ALL calculations have been made
+    private int finalDamageDealt = 0; // The damage the character takes after ALL calculations have been made
 
     [Header("Poise")]
     public float poiseDamage = 0;
@@ -65,7 +65,7 @@ public class TakeDamageEffect : InstantCharacterEffect
     private void CalculateDamage(CharacterStatsManager character)
     {
 
-        if (characterCausignDamage != null)
+        if (characterCausingDamage != null)
         {
             // Check for damage modifiers and modify base damage (physical/elemental damage buff)
         }

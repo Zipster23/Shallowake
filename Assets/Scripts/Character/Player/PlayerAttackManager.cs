@@ -1,0 +1,23 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PlayerAttackManager : MonoBehaviour
+{
+    PlayerManager player;
+
+    protected void Awake()
+    {
+        player = GetComponent<PlayerManager>();
+    }
+
+    public void AttemptToPerformAttack()
+    {
+        if(player.isPerformingAction)
+        {
+            return;
+        }
+
+        Debug.Log("Attemping to Perform Attack");
+    }
+}
