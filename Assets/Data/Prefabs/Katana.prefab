@@ -151,6 +151,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: daaa774fc8d36cf47b02bec4d6bbbdaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  physicalDamage: 0
+  magicDamage: 0
+  fireDamage: 0
+  lightningDamage: 0
+  holyDamage: 0
+  characterCausingDamage: {fileID: 0}
 --- !u!1 &6318219841484462006
 GameObject:
   m_ObjectHideFlags: 0
@@ -175,10 +181,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6318219841484462006}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.6487125, y: 0.70663863, z: -0.24618323, w: -0.13866419}
+  m_LocalRotation: {x: -0.6487109, y: 0.7066404, z: -0.24618223, w: -0.13866428}
   m_LocalPosition: {x: -0.1967, y: 0.132, z: 0.0108}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 324885460942458564}
   m_Father: {fileID: 0}

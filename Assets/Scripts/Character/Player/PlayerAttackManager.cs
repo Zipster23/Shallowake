@@ -19,5 +19,6 @@ public class PlayerAttackManager : MonoBehaviour
         }
 
         Debug.Log("Attemping to Perform Attack");
+        player.playerAnimatorManager.PlayTargetActionAnimation("Basic_Attack_01", true, true);
     }
 }
