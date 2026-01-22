@@ -21,6 +21,11 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
     [SerializeField] float rotationSpeed = 7.5f;
     [SerializeField] int sprintingStaminaCost = 2;
 
+    [Header("Movement Smoothing")]
+    [SerializeField] float accelerationTime = 0.1f; // Time to reach max speed. Higher = slower build up.
+    private float currentSpeedVelocity; // Reference variable for the math (don't touch this)
+    private float currentSpeed; // The actual speed the player is moving right now
+
     [Header("Dodge")]
     private Vector3 rollDirection;
     [SerializeField] float dodgeStaminaCost = 25;
@@ -59,30 +64,48 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
 
         GetVerticalAndHorizontalInputs();
 
-        moveDirection = PlayerCamera.instance.transform.forward * verticalMovement; // move relative to which way the player is facing
-        moveDirection = moveDirection + PlayerCamera.instance.transform.right * horizontalMovement; // adds the left and right movement
-        moveDirection.Normalize(); // makes sure the player doesn't move faster diagonally
-        moveDirection.y = 0; // keeps movement horizontal
+        // 1. Calculate the Direction (Geometry)
+        // We calculate this every frame so the direction is always correct relative to camera
+        moveDirection = PlayerCamera.instance.transform.forward * verticalMovement;
+        moveDirection += PlayerCamera.instance.transform.right * horizontalMovement;
+        moveDirection.Normalize();
+        moveDirection.y = 0;
 
-        if(player.playerInputManager.isSprinting)
-        {   
-            // move at a running speed
-            player.characterController.Move(moveDirection * sprintingSpeed * Time.deltaTime);
+        // 2. Determine the Target Speed (Logic)
+        float targetSpeed = 0;
+
+        // If there is no input, target speed is 0
+        if (PlayerInputManager.instance.moveAmount == 0)
+        {
+            targetSpeed = 0;
         }
         else
         {
-            if(PlayerInputManager.instance.moveAmount > 0.5f)
+            // If we are sprinting
+            if (player.playerInputManager.isSprinting)
             {
-                // move at a running speed
-                player.characterController.Move(moveDirection * runningSpeed * Time.deltaTime);
+                targetSpeed = sprintingSpeed;
             }
-            else if(PlayerInputManager.instance.moveAmount <= 0.5f)
+            // If we are just running (stick pushed fully)
+            else if (PlayerInputManager.instance.moveAmount > 0.5f)
             {
-                // move at a walking speed
-                player.characterController.Move(moveDirection * walkingSpeed * Time.deltaTime);
+                targetSpeed = runningSpeed;
+            }
+            // If we are walking (stick pushed lightly)
+            else
+            {
+                targetSpeed = walkingSpeed;
             }
         }
 
+        // 3. Smoothly Calculate the Speed (Physics/Feel)
+        // This function gradually changes 'currentSpeed' to match 'targetSpeed'
+        // 'accelerationTime' controls how sluggish or snappy the change feels
+        currentSpeed = Mathf.SmoothDamp(currentSpeed, targetSpeed, ref currentSpeedVelocity, accelerationTime);
+
+        // 4. Apply the Movement
+        // We use 'currentSpeed' instead of the fixed 'sprintingSpeed'
+        player.characterController.Move(moveDirection * currentSpeed * Time.deltaTime);
     }
 
     private void HandleRotation()
