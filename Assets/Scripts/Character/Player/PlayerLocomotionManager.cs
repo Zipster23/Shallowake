@@ -14,16 +14,17 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
     [Header("Movement Settings")]
     private Vector3 moveDirection;
     private Vector3 targetRotationDirection;
-    // sets "test" integers for walking and running speed
+    [SerializeField] float jumpHeight = 4;
     [SerializeField] float walkingSpeed = 2;
     [SerializeField] float runningSpeed = 5;
     [SerializeField] float sprintingSpeed = 7.5f;
     [SerializeField] float rotationSpeed = 7.5f;
-    [SerializeField] int sprintingStaminaCost = 2;
+    [SerializeField] int sprintingStaminaCost = 8;
 
     [Header("Dodge")]
     private Vector3 rollDirection;
     [SerializeField] float dodgeStaminaCost = 25;
+    [SerializeField] float jumpStaminaCost = 25;
 
     protected override void Awake()
     {
@@ -117,6 +118,7 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
             player.playerInputManager.isSprinting = false;  // set isSprinting to false so the player can't sprint while performing an action
         }
 
+        // If the character has no stamina, stop it from sprinting
         if(player.characterStatsManager.CurrentStamina <= 0)
         {
             player.playerInputManager.isSprinting = false;
@@ -133,6 +135,7 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
             player.playerInputManager.isSprinting = false;  // if barely moving or standing still, set isSprinting to false so they don't move at sprinting speed
         }
 
+        // If sprinting, gradually reduce the player's stamina by the sprintingStaminaCost
         if(player.playerInputManager.isSprinting)
         {
             player.characterStatsManager.CurrentStamina -= sprintingStaminaCost * Time.deltaTime;
@@ -175,8 +178,44 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
         {
             player.playerAnimatorManager.PlayTargetActionAnimation("Back_Step_01", true, true);
         }
+    }
 
+    public void AttemptToPerformJump()
+    {
 
+        if (player.isPerformingAction)
+        {
+            return;
+        }
+
+        // Check if player has enough stamina to jump
+        if(player.characterStatsManager.CurrentStamina < jumpStaminaCost)
+        {
+            return; // not enough stamina, can't jump
+        }
+
+        if(player.isJumping)
+        {
+            return;
+        }
+
+        if(!player.isGrounded)
+        {
+            return;
+        }
+
+        player.playerAnimatorManager.PlayTargetActionAnimation("Main_Jump_01", false);
+
+        player.isJumping = true;
+
+        player.characterStatsManager.CurrentStamina -= jumpStaminaCost;    // deduct stamina cost for jumping
+
+    }
+
+    public void ApplyJumpingVelocity()
+    {
+
+        yVelocity.y = Mathf.Sqrt(jumpHeight * (-2) * gravityForce);
 
     }
 
