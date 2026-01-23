@@ -92,6 +92,7 @@ public class PlayerInputManager : MonoBehaviour
             playerControls.PlayerCamera.Movement.performed += i => cameraInput = i.ReadValue<Vector2>();
             playerControls.PlayerActions.Dodge.performed += i => dodgeInput = true;
             playerControls.PlayerActions.Attack.performed += i => attackInput = true;
+            playerControls.PlayerActions.Parry.performed += i => parryInput = true;
 
             playerControls.PlayerActions.Sprint.performed += i => sprintInput = true;   // holding the input sets the bool to true (sprinting) 
             playerControls.PlayerActions.Sprint.canceled += i => sprintInput = false;   // releasing the input sets the bool to false (stops sprinting) 
@@ -135,6 +136,7 @@ public class PlayerInputManager : MonoBehaviour
         HandleDodgeInput();
         HandleSprintingInput();
         HandleAttackInput();
+        HandleParryInput();
     }
 
     // Movement
@@ -211,7 +213,10 @@ public class PlayerInputManager : MonoBehaviour
         {
             parryInput = false;
 
+            Debug.Log("Handling Parry Input");
+
             player.playerAttackManager.AttemptToPerformParry();
+            Debug.Log("Parry Input Finished");
         }
     }
 }
