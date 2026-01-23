@@ -29,6 +29,7 @@ public class PlayerInputManager : MonoBehaviour
     public bool isSprinting = false;
     public bool drawSheatheWeaponInput = false;
     [SerializeField] public bool attackInput = false;
+    [SerializeField] public bool parryInput = false;
 
     private void Awake()
     {
@@ -201,6 +202,16 @@ public class PlayerInputManager : MonoBehaviour
             attackInput = false;
 
             player.playerAttackManager.AttemptToPerformAttack();
+        }
+    }
+
+    private void HandleParryInput()
+    {
+        if(parryInput)
+        {
+            parryInput = false;
+
+            player.playerAttackManager.AttemptToPerformParry();
         }
     }
 }
