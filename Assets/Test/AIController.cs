@@ -15,6 +15,9 @@ public class AIController : MonoBehaviour
     private int comboCount = 0;
     private Renderer dummyRenderer;              // Mesh component of the dummy to add an "attack indicator"
 
+    private float lastHitTime = 0;
+    private float hitCooldown = 0.5f;
+
     void Start()
     {
         // Find the player in the scene
@@ -33,40 +36,52 @@ public class AIController : MonoBehaviour
     }
 
     private void Update()
-{       
-    // Only run logic if the agent is ready and the player is in the scene
-    if (agent.isActiveAndEnabled && agent.isOnNavMesh && destination != null)
-    {
-        float distanceToPlayer = Vector3.Distance(transform.position, destination.transform.position);
-
-        // Calculates a path to the player's current position
-        agent.SetDestination(destination.transform.position);
-
-        if(distanceToPlayer <= attackRange && Time.time >= nextAttackTime)
+    {       
+        // Only run logic if the agent is ready and the player is in the scene
+        if (agent.isActiveAndEnabled && agent.isOnNavMesh && destination != null)
         {
-            comboCount++;
-            StartCoroutine(AttackFlash());
+            float distanceToPlayer = Vector3.Distance(transform.position, destination.transform.position);
 
-            if(comboCount % 3 == 0)
+            // Calculates a path to the player's current position
+            agent.SetDestination(destination.transform.position);
+
+            if(distanceToPlayer <= attackRange && Time.time >= nextAttackTime)
             {
-                nextAttackTime = Time.time + 2.5f;
-            } 
-            else
-            {
-                nextAttackTime = Time.time + 0.6f;
+                comboCount++;
+                StartCoroutine(AttackFlash());
+
+                if(comboCount % 3 == 0)
+                {
+                    nextAttackTime = Time.time + 2.5f;
+                } 
+                else
+                {
+                    nextAttackTime = Time.time + 0.6f;
+                }
             }
+            // Stores the movement vector (how fast the dummy is moving) in a variable
+            Vector3 worldVelocity = agent.velocity;
+
+            // Calculates if this movement is happening in the direction that the dummy is facing
+            Vector3 localVelocity = transform.InverseTransformDirection(worldVelocity);
+
+            // Map these to the specific Blend Tree parameters
+            // localVelocity.z is Forward/Backward
+            // localVelocity.x is Left/Right
+            anim.SetFloat("Vertical", localVelocity.z);
+            anim.SetFloat("Horizontal", localVelocity.x);
+        }   
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+
+
+        if(other.CompareTag("Weapon") && Time.time >= lastHitTime + hitCooldown)
+        {
+            Debug.Log("Hit! Player slashed the dummy");
+            lastHitTime = Time.time;
         }
-        // Stores the movement vector (how fast the dummy is moving) in a variable
-        Vector3 worldVelocity = agent.velocity;
-
-        // Calculates if this movement is happening in the direction that the dummy is facing
-        Vector3 localVelocity = transform.InverseTransformDirection(worldVelocity);
-
-        // Map these to the specific Blend Tree parameters
-        // localVelocity.z is Forward/Backward
-        // localVelocity.x is Left/Right
-        anim.SetFloat("Vertical", localVelocity.z);
-        anim.SetFloat("Horizontal", localVelocity.x);
     }
 
     System.Collections.IEnumerator AttackFlash()
@@ -75,5 +90,6 @@ public class AIController : MonoBehaviour
         yield return new WaitForSeconds(0.3f);
         dummyRenderer.material.color = Color.red;
     }
-}
+
+
 }

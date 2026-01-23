@@ -14,7 +14,6 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
     [Header("Movement Settings")]
     private Vector3 moveDirection;
     private Vector3 targetRotationDirection;
-    [SerializeField] float jumpHeight = 4;
     [SerializeField] float walkingSpeed = 2;
     [SerializeField] float runningSpeed = 5;
     [SerializeField] float sprintingSpeed = 7.5f;
@@ -24,7 +23,6 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
     [Header("Dodge")]
     private Vector3 rollDirection;
     [SerializeField] float dodgeStaminaCost = 25;
-    [SerializeField] float jumpStaminaCost = 25;
 
     protected override void Awake()
     {
@@ -180,43 +178,6 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
         }
     }
 
-    public void AttemptToPerformJump()
-    {
 
-        if (player.isPerformingAction)
-        {
-            return;
-        }
-
-        // Check if player has enough stamina to jump
-        if(player.characterStatsManager.CurrentStamina < jumpStaminaCost)
-        {
-            return; // not enough stamina, can't jump
-        }
-
-        if(player.isJumping)
-        {
-            return;
-        }
-
-        if(!player.isGrounded)
-        {
-            return;
-        }
-
-        player.playerAnimatorManager.PlayTargetActionAnimation("Main_Jump_01", false);
-
-        player.isJumping = true;
-
-        player.characterStatsManager.CurrentStamina -= jumpStaminaCost;    // deduct stamina cost for jumping
-
-    }
-
-    public void ApplyJumpingVelocity()
-    {
-
-        yVelocity.y = Mathf.Sqrt(jumpHeight * (-2) * gravityForce);
-
-    }
 
 }

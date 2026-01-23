@@ -11,7 +11,6 @@ public class CharacterManager : MonoBehaviour
     [Header("Flags")]
     public bool isPerformingAction = false;
     public bool isJumping = false;
-    public bool isGrounded = true;
     public bool applyRootMotion = false;
     public bool canRotate = true;
     public bool canMove = true;
@@ -27,7 +26,7 @@ public class CharacterManager : MonoBehaviour
 
     protected virtual void Update()
     {
-        animator.SetBool("isGrounded", isGrounded);
+
     }
 
     protected virtual void FixedUpdate()
