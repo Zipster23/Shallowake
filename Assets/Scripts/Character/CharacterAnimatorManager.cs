@@ -46,4 +46,12 @@ public class CharacterAnimatorManager : MonoBehaviour
         character.canMove = canMove;
     }
 
+    public void ResetActionFlags()
+    {
+        character.isPerformingAction = false;
+        character.applyRootMotion = false;
+        character.canRotate = true;
+        character.canMove = true;
+    }
+
 }

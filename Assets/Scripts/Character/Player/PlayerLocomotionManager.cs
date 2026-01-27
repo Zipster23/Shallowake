@@ -24,6 +24,9 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
     private Vector3 rollDirection;
     [SerializeField] float dodgeStaminaCost = 25;
 
+    [Header("Abilities")]
+    [SerializeField] float abilityStaminaCost = 25;
+
     protected override void Awake()
     {
         base.Awake();
@@ -176,6 +179,25 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
         {
             player.playerAnimatorManager.PlayTargetActionAnimation("Back_Step_01", true, true);
         }
+    }
+
+    public void AttemptToPerformAbility()
+    {
+
+        if(player.isPerformingAction)
+        {
+            return;
+        }
+
+        if(player.characterStatsManager.CurrentStamina < abilityStaminaCost)
+        {
+            return;
+        }
+
+        player.characterStatsManager.CurrentStamina -= abilityStaminaCost;
+
+        player.playerAnimatorManager.PlayTargetActionAnimation("playerAbility1", true, true);
+
     }
 
 
