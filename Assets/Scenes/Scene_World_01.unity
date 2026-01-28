@@ -640,6 +640,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 84299256666714982, guid: 532fa9f507370a845a24213b632b8ba7,
+        type: 3}
+      propertyPath: maxStamina
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 1196044179144028782, guid: 532fa9f507370a845a24213b632b8ba7,
         type: 3}
       propertyPath: m_Name
@@ -649,6 +654,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1226757622494467641, guid: 532fa9f507370a845a24213b632b8ba7,
+        type: 3}
+      propertyPath: m_TagString
+      value: Weapon
       objectReference: {fileID: 0}
     - target: {fileID: 2004914873825093844, guid: 532fa9f507370a845a24213b632b8ba7,
         type: 3}
@@ -740,7 +750,9 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2579875902945847812, guid: 532fa9f507370a845a24213b632b8ba7, type: 3}
+    - {fileID: 8108126633056398138, guid: 532fa9f507370a845a24213b632b8ba7, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:

@@ -12,11 +12,19 @@ public class WeaponDamageCollider : MonoBehaviour
 
     private void OnEnable()
     {
+        Debug.Log("WEAPON COLLIDER ENABLED!");
         alreadyHitTargets.Clear();
+    }
+
+    private void OnDisable()
+    {
+        Debug.Log("WEAPON COLLIDER DISABLED!");
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log($"Weapon hit something: {other.gameObject.name}");
+
         DamageableCharacter damageable = other.GetComponent<DamageableCharacter>();
 
         if(damageable != null)
@@ -30,8 +38,12 @@ public class WeaponDamageCollider : MonoBehaviour
                 Debug.Log($"Hit {other.gameObject.name} for {damage} damage!");
             }
         }
+        else
+        {
+            Debug.Log($"{other.gameObject.name} is not damageable!");
+        }
     }
 
-    
+
 
 }
