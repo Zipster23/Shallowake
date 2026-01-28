@@ -12,8 +12,6 @@ public class CharacterStatsManager : MonoBehaviour
 
     CharacterManager character; // reference to the CharacterManager component used to check character states (sprinting, dodging, backstepping, etc)
 
-    [HideInInspector] public CharacterEffectsManager characterEffectsManager;
-
     public int endurance = 1;   // stat variable. The higher the endurance, the more max stamina.
 
     public int maxStamina = 0;                              // maximum stamina a character can have
@@ -42,7 +40,6 @@ public class CharacterStatsManager : MonoBehaviour
     protected virtual void Awake()
     {
         character = GetComponent<CharacterManager>();   // gets the CharacterManager component used to check the character's current state (e.g. sprinting, dodging, etc)
-        characterEffectsManager = GetComponent<CharacterEffectsManager>();
     }
 
 
